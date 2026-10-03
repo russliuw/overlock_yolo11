@@ -31,6 +31,7 @@ if ROOT not in sys.path:
 
 import torch  # noqa: E402
 
+from overlock_yolo.cli import cli_guard  # noqa: E402
 from overlock_yolo.config import ConfigError, load_experiment  # noqa: E402
 from overlock_yolo.paths import (  # noqa: E402
     PathResolutionError,
@@ -836,6 +837,7 @@ def m10_tools(results: Results, ultra_root: str) -> None:
             "scripts/profile_model.py",
             "scripts/server_preflight.py",
             "scripts/gpu_smoke.py",
+            "scripts/report_environment.py",
         ):
             out = subprocess.run(
                 [sys.executable, os.path.join(ROOT, script), "--help"],
@@ -956,6 +958,7 @@ def m11_data_git(results: Results, ultra_root: str) -> None:
 
 
 # --------------------------------------------------------------------------------------
+@cli_guard
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="M01-M11 CPU verification for OverLoCK + YOLO11/YOLO26")
     ap.add_argument("--out", default=os.path.join(REPORTS, "validation.json"))

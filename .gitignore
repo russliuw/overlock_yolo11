@@ -53,3 +53,4 @@ venv/
 # --- local environment / reports that are regenerated ------------------------------------
 # keep: reports/v2/*.json (curated), reports/v2/HANDOFF.md
 # the raw runner logs live in artifacts/ (ignored above)
+reports/v2/val_result.json

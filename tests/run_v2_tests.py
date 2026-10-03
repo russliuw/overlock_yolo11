@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""Standalone runner for ``tests/test_v2_contract.py`` (pytest is not installed locally).
+"""Standalone runner for ``tests/test_v2_contract_pytest.py`` (pytest is not installed locally).
+
+The test module is named ``*_pytest.py`` on purpose: ``unittest discover`` would otherwise import
+it (and fail on the missing pytest), while ``pytest tests/`` still collects it (the default
+``python_files`` pattern is ``test_*.py``).
 
 Runs every ``test_*`` function and every ``@pytest.mark.parametrize`` case, reporting the same
 verdicts the pytest suite would::
@@ -90,7 +94,7 @@ def main(argv=None) -> int:
     shimmed = install_pytest_shim()
     import pytest
 
-    path = os.path.join(ROOT, "tests", "test_v2_contract.py")
+    path = os.path.join(ROOT, "tests", "pytest_contract", "test_v2_contract.py")
     spec = importlib.util.spec_from_file_location("test_v2_contract", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -126,7 +130,7 @@ def main(argv=None) -> int:
     payload = {
         "meta": {
             "generated_by": "tests/run_v2_tests.py",
-            "module": "tests/test_v2_contract.py",
+            "module": "tests/pytest_contract/test_v2_contract.py",
             "pytest_available": not shimmed,
             "pytest_shim_used": shimmed,
             "device": "cpu",

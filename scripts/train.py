@@ -26,7 +26,7 @@ ROOT = os.path.dirname(HERE)
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from overlock_yolo.cli import bootstrap, data_or_view, emit_summary, load_config_for_args  # noqa: E402
+from overlock_yolo.cli import cli_guard, bootstrap, data_or_view, emit_summary, load_config_for_args  # noqa: E402
 from overlock_yolo.config import build_arg_parser  # noqa: E402
 from overlock_yolo.paths import project_root  # noqa: E402
 
@@ -41,6 +41,7 @@ def _smoke_marker(view_dir) -> dict | None:
         return json.load(fh)
 
 
+@cli_guard
 def main(argv: list | None = None) -> int:
     ap = build_arg_parser("Train OverLoCK (xt/t/s/b) + native YOLO11/YOLO26 on SODA10M")
     ap.add_argument("--allow-smoke-view", action="store_true", help="explicitly allow training on a --limit view")

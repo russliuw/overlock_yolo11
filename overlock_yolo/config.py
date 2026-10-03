@@ -372,6 +372,12 @@ def validate_config(cfg: dict, *, project_root: Optional[str] = None, require_we
     )
     if d.get("view"):
         d["view"] = os.path.normpath(os.path.abspath(expand_path_vars(d["view"], root_for_paths)))
+    if b["weights"] and weights is not None and not os.path.isfile(weights):
+        raise ConfigError(
+            f"backbone.weights points at {weights}, which does not exist. This project never "
+            "downloads weights: place the file, fix the path, or set backbone.pretrained=false "
+            "for an explicitly random structure test."
+        )
     if b["pretrained"] and weights is None:
         probed = [p for p in (b["weights"], f"<project>/../OverLoCK-main/checkpoints/overlock_{b['variant']}_in1k_224.pth") if p]
         raise ConfigError(

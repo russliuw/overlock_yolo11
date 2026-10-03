@@ -56,8 +56,12 @@ python scripts/val.py --config configs/overlock_t_yolo11s_soda.yaml --view data/
 python scripts/profile_model.py --config configs/overlock_t_yolo11s_soda.yaml
 python scripts/profile_model.py --matrix --verify-matrix
 
-# 5. local CPU verification of the whole contract (M01-M11)
+# 5. local CPU verification of the whole contract (M01-M11) + targeted regression tests
 python scripts/smoke.py --out reports/v2/validation.json
+python tests/run_v2_tests.py                       # pytest-compatible; the shim is only for the
+                                                   # local env, which has no pytest installed
+python -m unittest discover -s tests -p "test_*.py"   # V1 unit tests, still green
+python scripts/report_environment.py               # environment.json + compatibility.json
 ```
 
 Training a **full** dataset (server):
@@ -159,7 +163,9 @@ scripts/                train, val, profile_model, prepare_data, smoke (M01-M11)
 configs/                four ready-to-run experiment configs
 vendor/ultralytics/     pinned Ultralytics 8.4.148 pure-source snapshot (AGPL-3.0)
 reports/v2/             JSON reports + HANDOFF.md (source of truth)
-tests/                  V1 unit tests (historical) + V2 regression tests
+tests/                  V1 unit tests (unittest) + V2 regression tests
+  run_v2_tests.py       standalone runner (works without pytest)
+  pytest_contract/      the pytest-style V2 regression suite
 DESIGN_V2.md            the V2 contract
 THIRD_PARTY_NOTICES.md  vendored sources and licenses
 ```

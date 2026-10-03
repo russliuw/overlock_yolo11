@@ -23,11 +23,12 @@ ROOT = os.path.dirname(HERE)
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from overlock_yolo.cli import bootstrap, build_from_config, data_or_view, emit_summary, load_config_for_args  # noqa: E402
+from overlock_yolo.cli import cli_guard, bootstrap, build_from_config, data_or_view, emit_summary, load_config_for_args  # noqa: E402
 from overlock_yolo.config import build_arg_parser  # noqa: E402
 from overlock_yolo.paths import project_root  # noqa: E402
 
 
+@cli_guard
 def main(argv: list | None = None) -> int:
     ap = build_arg_parser("Native Ultralytics detection validation (fixed square 640 protocol)")
     ap.add_argument("--out", default=os.path.join(project_root(), "reports", "v2", "val_result.json"))

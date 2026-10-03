@@ -1,12 +1,12 @@
 {
   "meta": {
     "generated_by": "tests/run_v2_tests.py",
-    "module": "tests/test_v2_contract.py",
+    "module": "tests/pytest_contract/test_v2_contract.py",
     "pytest_available": false,
     "pytest_shim_used": true,
     "device": "cpu",
     "dtype": "float32",
-    "total_seconds": 35.23
+    "total_seconds": 40.26
   },
   "summary": {
     "pass": 25,
@@ -19,37 +19,37 @@
     {
       "test": "test_adapter_channels_match_the_native_neck_entries",
       "status": "pass",
-      "seconds": 2.078,
+      "seconds": 2.787,
       "error": null
     },
     {
       "test": "test_backbone_load_does_not_reinitialise_the_head",
       "status": "pass",
-      "seconds": 0.915,
+      "seconds": 0.802,
       "error": null
     },
     {
       "test": "test_backend_resolution_is_lazy_and_per_device",
       "status": "pass",
-      "seconds": 1.83,
+      "seconds": 1.378,
       "error": null
     },
     {
       "test": "test_cli_overrides_do_not_apply_defaults",
       "status": "pass",
-      "seconds": 0.001,
+      "seconds": 0.003,
       "error": null
     },
     {
       "test": "test_detect_head_is_initialised_and_stride_correct[family=yolo11,reg_max=16]",
       "status": "pass",
-      "seconds": 0.041,
+      "seconds": 0.036,
       "error": null
     },
     {
       "test": "test_detect_head_is_initialised_and_stride_correct[family=yolo26,reg_max=1]",
       "status": "pass",
-      "seconds": 0.044,
+      "seconds": 0.039,
       "error": null
     },
     {
@@ -61,49 +61,49 @@
     {
       "test": "test_end2end_property_is_preserved",
       "status": "pass",
-      "seconds": 0.687,
+      "seconds": 0.55,
       "error": null
     },
     {
       "test": "test_forward_dict_returns_loss_not_predictions[family=yolo11]",
       "status": "pass",
-      "seconds": 3.822,
+      "seconds": 3.559,
       "error": null
     },
     {
       "test": "test_forward_dict_returns_loss_not_predictions[family=yolo26]",
       "status": "pass",
-      "seconds": 3.941,
+      "seconds": 3.695,
       "error": null
     },
     {
       "test": "test_loss_is_not_recursive_via_forward",
       "status": "pass",
-      "seconds": 2.223,
+      "seconds": 2.909,
       "error": null
     },
     {
       "test": "test_native_criterion_selection_per_family",
       "status": "pass",
-      "seconds": 1.023,
+      "seconds": 1.159,
       "error": null
     },
     {
       "test": "test_no_hardcoded_machine_path_is_used_at_runtime",
       "status": "pass",
-      "seconds": 0.147,
+      "seconds": 0.17,
       "error": null
     },
     {
       "test": "test_paths_resolve_from_another_cwd",
       "status": "pass",
-      "seconds": 0.039,
+      "seconds": 0.058,
       "error": null
     },
     {
       "test": "test_project_checkpoint_round_trip_and_structure_gate",
       "status": "pass",
-      "seconds": 11.963,
+      "seconds": 15.148,
       "error": null
     },
     {
@@ -115,25 +115,25 @@
     {
       "test": "test_reference_matches_naive_loop_oracle_on_edges",
       "status": "pass",
-      "seconds": 0.287,
+      "seconds": 0.38,
       "error": null
     },
     {
       "test": "test_reference_never_materialises_the_full_patch_tensor",
       "status": "pass",
-      "seconds": 0.012,
+      "seconds": 0.014,
       "error": null
     },
     {
       "test": "test_repository_defaults_contain_no_absolute_paths",
       "status": "pass",
-      "seconds": 0.012,
+      "seconds": 0.011,
       "error": null
     },
     {
       "test": "test_single_registration_no_state_dict_aliases",
       "status": "pass",
-      "seconds": 0.439,
+      "seconds": 0.555,
       "error": null
     },
     {
@@ -151,19 +151,19 @@
     {
       "test": "test_thop_artifacts_never_reach_a_checkpoint",
       "status": "pass",
-      "seconds": 2.629,
+      "seconds": 3.113,
       "error": null
     },
     {
       "test": "test_three_selectors_are_independent",
       "status": "pass",
-      "seconds": 0.823,
+      "seconds": 0.745,
       "error": null
     },
     {
       "test": "test_yolo26_one_to_one_features_are_detached",
       "status": "pass",
-      "seconds": 2.273,
+      "seconds": 3.134,
       "error": null
     }
   ]

@@ -18,11 +18,12 @@ ROOT = os.path.dirname(HERE)
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from overlock_yolo.cli import bootstrap, emit_summary, load_config_for_args  # noqa: E402
+from overlock_yolo.cli import cli_guard, bootstrap, emit_summary, load_config_for_args  # noqa: E402
 from overlock_yolo.config import build_arg_parser  # noqa: E402
 from overlock_yolo.paths import project_root  # noqa: E402
 
 
+@cli_guard
 def main(argv: list | None = None) -> int:
     ap = build_arg_parser("Profile parameters / partial MACs / na2d_av MACs for one combination")
     ap.add_argument("--out", default=None, help="JSON output (default reports/v2/profile_<combination>.json)")

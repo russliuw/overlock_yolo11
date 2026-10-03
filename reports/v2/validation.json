@@ -10,7 +10,7 @@
     "amp": false,
     "workers": 0,
     "torch_threads": 8,
-    "total_seconds": 142.38,
+    "total_seconds": 103.9,
     "per_item_budget_seconds": 180,
     "environment": {
       "natten_importable": false,
@@ -42,7 +42,7 @@
       "id": "M01",
       "name": "config/path contracts (3 independent selectors, strict YAML, cwd independence)",
       "status": "pass",
-      "seconds": 0.597,
+      "seconds": 0.563,
       "budget_seconds": null,
       "evidence": {
         "n_combinations": 40,
@@ -140,7 +140,7 @@
             ]
           }
         ],
-        "duplicate_key_error": "duplicate key 'scale' in /var/folders/tl/zk7_20z50cj35914r20td8bh0000gn/T/tmpajweni72/dup.yaml line 3; refusing to let a later value silently win",
+        "duplicate_key_error": "duplicate key 'scale' in /var/folders/tl/zk7_20z50cj35914r20td8bh0000gn/T/tmpjhf96xtq/dup.yaml line 3; refusing to let a later value silently win",
         "ambiguous_scale_error": "top-level 'scale:' is ambiguous: use yolo.scale for the architecture spec (n/s/m/l/x) and train.scale for the geometric ",
         "rejected::unknown_key": "ConfigError",
         "rejected::unknown_section": "ConfigError",
@@ -217,7 +217,7 @@
       "id": "M02",
       "name": "four OverLoCK backbones: official config + small forward (all random)",
       "status": "pass",
-      "seconds": 5.937,
+      "seconds": 5.586,
       "budget_seconds": 180,
       "evidence": {
         "variants": {
@@ -717,7 +717,7 @@
       "id": "M03",
       "name": "10 native tails: family/scale channels, reg_max, one2one, C3k, bias_init",
       "status": "pass",
-      "seconds": 1.124,
+      "seconds": 0.976,
       "budget_seconds": 180,
       "evidence": {
         "tails": {
@@ -1331,7 +1331,7 @@
       "id": "M04",
       "name": "40-combination interface: channels/routing/parameter matrix consistency",
       "status": "pass",
-      "seconds": 6.969,
+      "seconds": 6.021,
       "budget_seconds": 180,
       "evidence": {
         "n_cells": 40,
@@ -1358,7 +1358,7 @@
               "adapters": 460800,
               "neck_head": 3988130
             },
-            "state_dict_keys": 5771,
+            "state_dict_keys": 3015,
             "duplicate_registration": []
           },
           {
@@ -1376,7 +1376,7 @@
               "adapters": 230400,
               "neck_head": 1225538
             },
-            "state_dict_keys": 5771,
+            "state_dict_keys": 3015,
             "duplicate_registration": []
           },
           {
@@ -1394,7 +1394,7 @@
               "adapters": 546816,
               "neck_head": 3988130
             },
-            "state_dict_keys": 9883,
+            "state_dict_keys": 5071,
             "duplicate_registration": []
           },
           {
@@ -1412,7 +1412,7 @@
               "adapters": 230400,
               "neck_head": 1140668
             },
-            "state_dict_keys": 5980,
+            "state_dict_keys": 3224,
             "duplicate_registration": []
           },
           {
@@ -1430,7 +1430,7 @@
               "adapters": 460800,
               "neck_head": 4510524
             },
-            "state_dict_keys": 5980,
+            "state_dict_keys": 3224,
             "duplicate_registration": []
           }
         ],
@@ -1662,7 +1662,7 @@
       "id": "M05",
       "name": "OverLoCK-T/B real weights: safe load, per-key audit, cross-variant rejection",
       "status": "pass",
-      "seconds": 6.213,
+      "seconds": 5.479,
       "budget_seconds": 180,
       "evidence": {
         "t": {
@@ -2306,7 +2306,7 @@
       "id": "M06",
       "name": "fixed 640x640 forward with real T weights (yolo11s + yolo26s) + letterbox",
       "status": "pass",
-      "seconds": 32.952,
+      "seconds": 26.571,
       "budget_seconds": 180.0,
       "evidence": {
         "combinations": {
@@ -2316,8 +2316,8 @@
             "weights": "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/checkpoints/overlock_t_in1k_224.pth",
             "weights_loaded": true,
             "numel_coverage": 0.989994,
-            "build_seconds": 0.95,
-            "forward_seconds": 4.74,
+            "build_seconds": 0.83,
+            "forward_seconds": 3.82,
             "adapted_feature_shapes": [
               [
                 1,
@@ -2373,7 +2373,7 @@
             ],
             "reg_max": 16,
             "end2end": false,
-            "rss_gb": 1.45,
+            "rss_gb": 1.35,
             "detect_feature_shapes": [
               [
                 1,
@@ -2406,8 +2406,8 @@
             "weights": "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/checkpoints/overlock_t_in1k_224.pth",
             "weights_loaded": true,
             "numel_coverage": 0.989994,
-            "build_seconds": 1.02,
-            "forward_seconds": 4.32,
+            "build_seconds": 0.85,
+            "forward_seconds": 3.8,
             "adapted_feature_shapes": [
               [
                 1,
@@ -2463,7 +2463,7 @@
             ],
             "reg_max": 1,
             "end2end": true,
-            "rss_gb": 1.57,
+            "rss_gb": 1.35,
             "detect_feature_shapes": [
               [
                 1,
@@ -2524,7 +2524,7 @@
       "id": "M07",
       "name": "one native train step per family (model(batch) -> loss -> backward -> step)",
       "status": "pass",
-      "seconds": 6.42,
+      "seconds": 5.029,
       "budget_seconds": 180,
       "evidence": {
         "families": {
@@ -2542,17 +2542,17 @@
             },
             "loss_finite": true,
             "loss_is_sumable": true,
-            "forward_seconds": 1.068,
-            "backward_seconds": 1.422,
+            "forward_seconds": 0.939,
+            "backward_seconds": 0.971,
             "grad_tensors": 1903,
             "grads_finite": true,
             "backbone_grad_tensors": 1759,
             "adapter_grad_tensors": 9,
             "head_grad_tensors": 135,
             "optimizer_step_changed_param": true,
-            "optimizer_param": "stem_module.backbone.patch_embed1.0.weight",
+            "optimizer_param": "model.10.backbone.patch_embed1.0.weight",
             "criterion_updates_lifecycle": null,
-            "rss_gb": 1.57
+            "rss_gb": 1.35
           },
           "yolo26": {
             "criterion": "E2ELoss",
@@ -2568,20 +2568,20 @@
             },
             "loss_finite": true,
             "loss_is_sumable": true,
-            "forward_seconds": 1.079,
-            "backward_seconds": 1.39,
+            "forward_seconds": 0.892,
+            "backward_seconds": 1.105,
             "grad_tensors": 2014,
             "grads_finite": true,
             "backbone_grad_tensors": 1759,
             "adapter_grad_tensors": 9,
             "head_grad_tensors": 246,
             "optimizer_step_changed_param": true,
-            "optimizer_param": "stem_module.backbone.patch_embed1.0.weight",
+            "optimizer_param": "model.10.backbone.patch_embed1.0.weight",
             "criterion_updates_lifecycle": {
               "o2m_before": 0.8,
               "o2m_after_update": 0.792929292929293
             },
-            "rss_gb": 1.57
+            "rss_gb": 1.35
           }
         }
       },
@@ -2592,7 +2592,7 @@
       "id": "M08",
       "name": "attention reference vs independent oracle (values, boundaries, gradients, chunking)",
       "status": "pass",
-      "seconds": 2.71,
+      "seconds": 2.301,
       "budget_seconds": 180,
       "evidence": {
         "cases": [
@@ -2709,7 +2709,7 @@
       "id": "M09",
       "name": "unique parameter accounting, partial-MACs labelling, state_dict rebuild/reload",
       "status": "pass",
-      "seconds": 54.494,
+      "seconds": 17.721,
       "budget_seconds": 180,
       "evidence": {
         "parameters": {
@@ -2745,7 +2745,7 @@
             }
           }
         },
-        "state_dict_tensors": 5771,
+        "state_dict_tensors": 3015,
         "state_dict_unique_keys": true,
         "input_invariance": {
           "numel_by_imgsz": {
@@ -2757,8 +2757,8 @@
         },
         "partial_macs": {
           "available": true,
-          "partial_macs": 198440307712,
-          "partial_gflops_1mac2flops": 396.880615424,
+          "partial_macs": 53145699328,
+          "partial_gflops_1mac2flops": 106.291398656,
           "macs_definition": "1 MAC = 1 multiply-accumulate; the GFLOPs column uses 1 MAC = 2 FLOPs",
           "imgsz": 640,
           "batch": 1,
@@ -2781,18 +2781,18 @@
             "DFL softmax projection"
           ],
           "completeness": "partial_macs -- conv/linear/batchnorm only; NOT the full detector cost",
-          "seconds": 5.01
+          "seconds": 3.61
         },
         "complete_flops_available": false,
         "round_trip": {
           "manifest": {
-            "path": "/var/folders/tl/zk7_20z50cj35914r20td8bh0000gn/T/tmpbo5iqwac/state.pt",
+            "path": "/var/folders/tl/zk7_20z50cj35914r20td8bh0000gn/T/tmp058gk0jh/state.pt",
             "format": "overlock-yolo-state-v1",
-            "size_bytes": 152092726,
-            "sha256": "d2b0998f141c0bd7155dac24fb2b1ce7a9d6dad6f540f2746ffda15d249de189",
-            "n_tensors": 5771
+            "size_bytes": 151921974,
+            "sha256": "4cfb0cb636c89fd123fa1b6c1eb7ae709401751cca8d23c1ef877126218ffaeb",
+            "n_tensors": 3015
           },
-          "loaded_tensors": 5771,
+          "loaded_tensors": 3015,
           "missing_keys": [],
           "unexpected_keys": [],
           "structure": {
@@ -2826,7 +2826,7 @@
       "id": "M10",
       "name": "entry points + native DetectionValidator/DetMetrics on the 1-2 image view",
       "status": "pass",
-      "seconds": 24.315,
+      "seconds": 32.919,
       "budget_seconds": 180,
       "evidence": {
         "entry_points": {
@@ -2854,6 +2854,11 @@
             "returncode": 0,
             "cwd": "/tmp",
             "first_line": "usage: gpu_smoke.py [-h] [--config CONFIG] [--project-root PROJECT_ROOT]"
+          },
+          "scripts/report_environment.py": {
+            "returncode": 0,
+            "cwd": "/tmp",
+            "first_line": "usage: report_environment.py [-h] [--reports REPORTS]"
           }
         },
         "validator_yolo11": {
@@ -3131,7 +3136,7 @@
       "id": "M11",
       "name": "COCO bridge: mapping/image_id/boxes, real image dirs, no source writes",
       "status": "pass",
-      "seconds": 0.589,
+      "seconds": 0.677,
       "budget_seconds": 180,
       "evidence": {
         "mapping": {

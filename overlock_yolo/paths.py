@@ -235,10 +235,13 @@ def resolve_checkpoint_path(
     """
     name = f"overlock_{variant}_in1k_224.pth"
     root = project_root_ or _PROJECT_ROOT
-    candidates: List[str] = []
     if explicit:
-        candidates.append(os.path.abspath(expand_path_vars(explicit, root)))
+        # An explicitly requested path is returned as-is (even when missing) so callers can
+        # report "you asked for this file and it is not there" instead of silently falling back
+        # to a different checkpoint.
+        return os.path.abspath(expand_path_vars(explicit, root))
     src = resolve_sibling_overlock_root(overlock_root, project_root_=root)
+    candidates = []
     if src:
         candidates.append(os.path.join(src, "checkpoints", name))
     candidates.append(os.path.join(root, "checkpoints", name))

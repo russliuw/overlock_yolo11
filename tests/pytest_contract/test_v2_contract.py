@@ -7,6 +7,10 @@ fast (no 640 forward, no real checkpoint) so they can run on every change::
 
 The slower, end-to-end evidence lives in ``scripts/smoke.py`` (M01-M11) and
 ``reports/v2/validation.json``.
+
+Locally pytest is not installed, so `tests/run_v2_tests.py` runs this module with a small shim;
+both produce the same verdicts.  The file lives in ``tests/pytest_contract/`` so that
+``unittest discover -s tests`` does not try to import it.
 """
 
 from __future__ import annotations
@@ -20,7 +24,7 @@ import tempfile
 import pytest
 import torch
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 

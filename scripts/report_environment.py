@@ -24,6 +24,7 @@ ROOT = os.path.dirname(HERE)
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
+from overlock_yolo.cli import cli_guard  # noqa: E402
 from overlock_yolo.paths import install_ultralytics_root, prepare_ultralytics_env, resolve_ultralytics_root  # noqa: E402
 
 # The pinned source must be installed before anything imports ultralytics (the site-packages
@@ -102,8 +103,10 @@ def tree_digest(root: str) -> dict:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Write environment.json + compatibility.json (offline)")
-    ap.add_argument("--reports", default=os.path.join(ROOT, "reports", "v2"))
+    ap = argparse.ArgumentParser(description="Write environment.json + compatibility.json (offline, read-only)")
+    ap.add_argument("--reports", default=os.path.join(ROOT, "reports", "v2"), help="output directory")
+    ap.add_argument("--project-root", default=None, help="repository root (default: auto-detected)")
+    ap.add_argument("--ultralytics-root", default=None, help="pinned Ultralytics source root")
     args = ap.parse_args(argv)
     prepare_ultralytics_env()
     os.makedirs(args.reports, exist_ok=True)
@@ -284,4 +287,4 @@ def _has(md, name: str) -> bool:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(cli_guard(main)())

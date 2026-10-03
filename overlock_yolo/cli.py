@@ -33,12 +33,39 @@ Usage note: :func:`bootstrap` must run before anything imports ``ultralytics``.
 """
 
 __all__ = [
+    "cli_guard",
     "bootstrap",
     "BootstrapResult",
     "load_config_for_args",
     "build_from_config",
     "apply_thread_setting",
 ]
+
+
+def cli_guard(fn):
+    """Run an entry point, turning expected configuration/path errors into a clean exit.
+
+    A missing checkpoint, a missing dataset or a rejected option must print one actionable line
+    and exit non-zero -- never a raw traceback, and never a download attempt.
+    """
+    import functools
+
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        from .config import ConfigError
+        from .paths import PathResolutionError
+
+        try:
+            return fn(*args, **kwargs)
+        except (ConfigError, PathResolutionError, FileNotFoundError) as exc:
+            print(f"\n[overlock] ERROR: {exc}", file=sys.stderr)
+            print(
+                "[overlock] nothing was downloaded or modified. Fix the path/option above, then re-run.",
+                file=sys.stderr,
+            )
+            return 2
+
+    return wrapper
 
 
 class BootstrapResult:
