@@ -116,12 +116,12 @@ explicitly random structures.
 |---|---|
 | Path | `/Users/lw/Documents/CNN-Mamba/overlock_yolo11` (its own `.git`; the parent `CNN-Mamba` repo tracks nothing here and its index was not modified) |
 | Branch | `codex/overlock-yolo-portable` |
-| HEAD | `0b7c3e8` (`0b7c3e86c5645ee1e60aa25f3be95d367c01bd8c`), 3 commits |
-| Tracked files | 424 (62 project files + 362 vendored Ultralytics files) |
+| HEAD | `2ef54da` (`2ef54da7943284269c5dcf806650614b15ffdfb3`), 4 commits (the clone verification itself ran at `0b7c3e8`) |
+| Tracked files | 425 (63 project files + 362 vendored Ultralytics files) |
 | `.git` size | 3.1 MB; largest tracked blob 206,847 B; **no file > 1 MB** |
 | Remote | **none configured** — nothing was pushed or published |
 | Not committed | all `*.pth/*.pt/*.ckpt/*.onnx/*.engine`, data views, `*.cache`, `logs`, `runs`, `artifacts`, run products, machine-local config |
-| Clone verification | local `git clone` → same commit, 424 files, no forbidden content; every CLI `--help` worked from `cwd=/tmp`; `project_root` and the Ultralytics root resolved to the clone's own `vendor/ultralytics` (origin asserted inside it, version 8.4.148); a random `t+yolo26n` model built; missing data/checkpoints reported with an actionable error and **nothing downloaded**; the vendored tree is byte-identical to the local snapshot (digest `72cc2311…94a2`, equal to the value recorded in `compatibility.json`); V1 unittest suite 55 OK (13 skipped without the external data) and V2 suite 25/25 |
+| Clone verification | local `git clone` → same tree at `0b7c3e8`, 425 files, no forbidden content; every CLI `--help` worked from `cwd=/tmp`; `project_root` and the Ultralytics root resolved to the clone's own `vendor/ultralytics` (origin asserted inside it, version 8.4.148); a random `t+yolo26n` model built; missing data/checkpoints reported with an actionable error and **nothing downloaded**; the vendored tree is byte-identical to the local snapshot (digest `72cc2311…94a2`, equal to the value recorded in `compatibility.json`); V1 unittest suite 55 OK (13 skipped without the external data) and V2 suite 25/25 |
 
 Future workflow (nothing of this was executed): create your remote → `git remote add origin <your-url>`
 → `git push -u origin codex/overlock-yolo-portable` → clone it on the server → install the locked

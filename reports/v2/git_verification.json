@@ -3,10 +3,10 @@
   "repository": {
     "path": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11",
     "branch": "codex/overlock-yolo-portable",
-    "commit": "0b7c3e86c5645ee1e60aa25f3be95d367c01bd8c",
-    "short_commit": "0b7c3e8",
-    "n_commits": 3,
-    "tracked_files": 424,
+    "commit": "2ef54da7943284269c5dcf806650614b15ffdfb3",
+    "short_commit": "2ef54da",
+    "n_commits": 4,
+    "tracked_files": 425,
     "git_dir_bytes": 3235840,
     "remotes_configured": [],
     "parent_repo_tracks_this_dir": 0,
@@ -21,7 +21,8 @@
     "largest_tracked_blob_bytes": 206847,
     "largest_tracked_blob": "vendor/ultralytics/ultralytics/models/sam/predict.py",
     "files_over_1mb": 0,
-    "forbidden_content_present": []
+    "forbidden_content_present": [],
+    "note": "the clone was taken at 0b7c3e8; the two commits after it only add this report and update the documentation, so every clone check above still applies to the final tree"
   },
   "vendor_integrity": {
     "files": 362,
