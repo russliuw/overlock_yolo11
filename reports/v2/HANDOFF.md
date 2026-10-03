@@ -54,6 +54,7 @@ JSON reports in this directory are the source of truth; this file is the summary
 | `validation.json` | M01–M11 evidence (11/11 pass) |
 | `regression_tests.json` | 25/25 targeted regression tests pass |
 | `data_view.json` | the generated smoke view: real dirs, 1:1 image/label counts, per-class counts, no source writes |
+| `git_verification.json` | repository/clone identity, tracked-file counts, sizes, vendor digest equality and the checks run inside the clone |
 
 ## 4. Measured facts (CPU, FP32, batch 1, `workers=0`)
 
@@ -108,6 +109,24 @@ trainable key matches (`missing_disallowed = 0`); the 14 whitelisted keys are ex
 `extra_norm.*` + `h_proj.*` (333,056 / 421,008 numel). Loading T weights into a B backbone (and
 vice versa) raises `CheckpointError`. XT/S have **no** checkpoint locally and were only built as
 explicitly random structures.
+
+## 4b. Independent local Git repository
+
+| | |
+|---|---|
+| Path | `/Users/lw/Documents/CNN-Mamba/overlock_yolo11` (its own `.git`; the parent `CNN-Mamba` repo tracks nothing here and its index was not modified) |
+| Branch | `codex/overlock-yolo-portable` |
+| HEAD | `0b7c3e8` (`0b7c3e86c5645ee1e60aa25f3be95d367c01bd8c`), 3 commits |
+| Tracked files | 424 (62 project files + 362 vendored Ultralytics files) |
+| `.git` size | 3.1 MB; largest tracked blob 206,847 B; **no file > 1 MB** |
+| Remote | **none configured** — nothing was pushed or published |
+| Not committed | all `*.pth/*.pt/*.ckpt/*.onnx/*.engine`, data views, `*.cache`, `logs`, `runs`, `artifacts`, run products, machine-local config |
+| Clone verification | local `git clone` → same commit, 424 files, no forbidden content; every CLI `--help` worked from `cwd=/tmp`; `project_root` and the Ultralytics root resolved to the clone's own `vendor/ultralytics` (origin asserted inside it, version 8.4.148); a random `t+yolo26n` model built; missing data/checkpoints reported with an actionable error and **nothing downloaded**; the vendored tree is byte-identical to the local snapshot (digest `72cc2311…94a2`, equal to the value recorded in `compatibility.json`); V1 unittest suite 55 OK (13 skipped without the external data) and V2 suite 25/25 |
+
+Future workflow (nothing of this was executed): create your remote → `git remote add origin <your-url>`
+→ `git push -u origin codex/overlock-yolo-portable` → clone it on the server → install the locked
+requirements → place COCO + checkpoints → preflight → GPU smoke → train → native val. **No remote
+URL is configured or claimed**, and datasets/checkpoints never travel through Git.
 
 ## 5. Not verified (do not read these as done)
 

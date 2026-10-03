@@ -1,0 +1,74 @@
+{
+  "generated_by": "local git clone verification (offline; no remote, nothing pushed)",
+  "repository": {
+    "path": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11",
+    "branch": "codex/overlock-yolo-portable",
+    "commit": "0b7c3e86c5645ee1e60aa25f3be95d367c01bd8c",
+    "short_commit": "0b7c3e8",
+    "n_commits": 3,
+    "tracked_files": 424,
+    "git_dir_bytes": 3235840,
+    "remotes_configured": [],
+    "parent_repo_tracks_this_dir": 0,
+    "parent_repo_note": "the parent CNN-Mamba repo tracks nothing under overlock_yolo11; its index was not modified by this task"
+  },
+  "clone": {
+    "path": "/tmp/overlock_final.dOkKUS/overlock_yolo11",
+    "branch": "codex/overlock-yolo-portable",
+    "commit": "0b7c3e86c5645ee1e60aa25f3be95d367c01bd8c",
+    "tracked_files": 424,
+    "git_dir_bytes": 3244032,
+    "largest_tracked_blob_bytes": 206847,
+    "largest_tracked_blob": "vendor/ultralytics/ultralytics/models/sam/predict.py",
+    "files_over_1mb": 0,
+    "forbidden_content_present": []
+  },
+  "vendor_integrity": {
+    "files": 362,
+    "combined_sha256_repo": "72cc231163ac224b9073a874e1ee565c12cd275c3e2231483d31604ab98794a2",
+    "combined_sha256_clone": "72cc231163ac224b9073a874e1ee565c12cd275c3e2231483d31604ab98794a2",
+    "identical": true,
+    "file_by_file_differs_from_the_local_ultralytics_snapshot": 0,
+    "matches_recorded_compatibility_json": true,
+    "algorithm": "sha256 over sorted '<relpath> <sha256>' lines of vendor/ultralytics/ultralytics"
+  },
+  "checks_run_in_the_clone": [
+    {
+      "check": "scripts/*.py --help from cwd=/tmp",
+      "result": "pass (train, val, profile_model, server_preflight, gpu_smoke, report_environment)"
+    },
+    {
+      "check": "overlock_yolo.paths resolves project_root + vendored ultralytics root from another cwd",
+      "result": "pass"
+    },
+    {
+      "check": "ultralytics import origin is inside the clone's vendor snapshot",
+      "result": "pass"
+    },
+    {
+      "check": "vendored ultralytics version",
+      "result": "8.4.148"
+    },
+    {
+      "check": "random (no-pretrained) small model construction for t+yolo26n",
+      "result": "pass"
+    },
+    {
+      "check": "missing checkpoint/dataset reported with an actionable error, nothing downloaded",
+      "result": "pass (exit code 2)"
+    },
+    {
+      "check": "unittest suite (V1 tests)",
+      "result": "55 tests OK (13 skipped: external SODA10M/checkpoint resources not present)"
+    },
+    {
+      "check": "V2 regression suite (tests/run_v2_tests.py)",
+      "result": "25/25 pass"
+    }
+  ],
+  "not_verified_in_the_clone": [
+    "any GPU / NATTEN kernel result",
+    "training or accuracy on real data (dataset and checkpoints live outside the repository)",
+    "that a remote is reachable -- no remote is configured by design, nothing was pushed"
+  ]
+}
