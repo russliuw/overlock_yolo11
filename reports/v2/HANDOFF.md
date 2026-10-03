@@ -119,12 +119,11 @@ explicitly random structures.
 | HEAD | `15414c0`, 6 commits (the clone verification ran at `0b7c3e8`; a later isolation test found and fixed one more defect) |
 | Tracked files | 425 (63 project files + 362 vendored Ultralytics files) |
 | `.git` size | 3.1 MB; largest tracked blob 206,847 B; **no file > 1 MB** |
-| Remote | **none configured** — nothing was pushed or published |
+| Remote | `origin` = `https://github.com/russliuw/overlock_yolo11.git` (private); branch `codex/overlock-yolo-portable` pushed and re-cloned for verification |
 | Not committed | all `*.pth/*.pt/*.ckpt/*.onnx/*.engine`, data views, `*.cache`, `logs`, `runs`, `artifacts`, run products, machine-local config |
 | Clone verification | local `git clone` → same tree at `0b7c3e8`, 425 files, no forbidden content; every CLI `--help` worked from `cwd=/tmp`; `project_root` and the Ultralytics root resolved to the clone's own `vendor/ultralytics` (origin asserted inside it, version 8.4.148); a random `t+yolo26n` model built; missing data/checkpoints reported with an actionable error and **nothing downloaded**; the vendored tree is byte-identical to the local snapshot (digest `72cc2311…94a2`, equal to the value recorded in `compatibility.json`); V1 unittest suite 55 OK (13 skipped without the external data) and V2 suite 25/25 |
 
-Future workflow (nothing of this was executed): create your remote → `git remote add origin <your-url>`
-→ `git push -u origin codex/overlock-yolo-portable` → clone it on the server → install the locked
+Future workflow (the push is done; the server steps were not executed): clone it on the server → install the locked
 requirements → place COCO + checkpoints → preflight → GPU smoke → train → native val. **No remote
 URL is configured or claimed**, and datasets/checkpoints never travel through Git.
 
@@ -145,7 +144,7 @@ URL is configured or claimed**, and datasets/checkpoints never travel through Gi
 
 ## 6. Minimal next steps on the server
 
-1. `git clone <your-remote-url> overlock_yolo11 && cd overlock_yolo11`
+1. `git clone https://github.com/russliuw/overlock_yolo11.git overlock_yolo11 && cd overlock_yolo11`  (branch `codex/overlock-yolo-portable`)
 2. `python scripts/server_preflight.py --expect-gpu` — it checks the real `torch.version.cuda`,
    runs an actual CUDA kernel and the NATTEN kernel, and explains each failure with its fix.
 3. Install per `requirements-server.txt` with `-c constraints-server.txt`.
@@ -167,4 +166,7 @@ URL is configured or claimed**, and datasets/checkpoints never travel through Gi
   untouched. `vendor/ultralytics/ultralytics` is Ultralytics 8.4.148 (**AGPL-3.0**) with two
   unused demo images removed. Read `THIRD_PARTY_NOTICES.md` before redistributing.
 * `reports/*.json` (V1) are kept as history and describe the V1 code, not this one.
-* No remote is configured and nothing was pushed; the repository exists only locally.
+* The remote **https://github.com/russliuw/overlock_yolo11.git** (private) is configured and branch `codex/overlock-yolo-portable` is
+  pushed; cloning it from GitHub was verified (425 files, commit `8daa8c2`, vendor snapshot
+  present, CLIs run).  What remains unverified is everything downstream: the target GPU, NATTEN,
+  AMP, full training and every AP number.

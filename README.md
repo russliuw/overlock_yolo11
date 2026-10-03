@@ -172,7 +172,8 @@ THIRD_PARTY_NOTICES.md  vendored sources and licenses
 
 ## Server workflow (nothing here is executed locally)
 
-1. `git clone <your-remote-url> overlock_yolo11 && cd overlock_yolo11`
+1. `git clone https://github.com/russliuw/overlock_yolo11.git overlock_yolo11 && cd overlock_yolo11`
+   (branch `codex/overlock-yolo-portable`)
 2. `python scripts/server_preflight.py --expect-gpu` (read-only; explains every failure)
 3. install per `requirements-server.txt` + `constraints-server.txt` (never a blanket `-U`)
 4. put COCO data and the OverLoCK checkpoints in place, point the config paths at them
@@ -181,9 +182,10 @@ THIRD_PARTY_NOTICES.md  vendored sources and licenses
 7. `python scripts/train.py --config ... --view data/soda_full --device 0`
 8. `python scripts/val.py --config ... --view data/soda_full --device 0`
 
-No remote is configured in this repository yet (it was created locally on request).  Weights and
-datasets never travel through Git: `checkpoints/` and the data views are git-ignored, and the
-repository only records their expected file names/paths.
+The remote is **https://github.com/russliuw/overlock_yolo11.git** (private) and branch `codex/overlock-yolo-portable` is pushed; cloning it
+was verified end to end (paths resolve to the clone's own `vendor/ultralytics`, CLIs run).
+Weights and datasets never travel through Git: `checkpoints/` and the data views are git-ignored,
+and the repository only records their expected file names/paths.
 
 ## Licenses
 

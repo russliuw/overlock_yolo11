@@ -8,7 +8,10 @@
     "n_commits": 6,
     "tracked_files": 425,
     "git_dir_bytes": 3235840,
-    "remotes_configured": [],
+    "remotes_configured": [
+      "origin\thttps://github.com/russliuw/overlock_yolo11.git (fetch)",
+      "origin\thttps://github.com/russliuw/overlock_yolo11.git (push)"
+    ],
     "parent_repo_tracks_this_dir": 0,
     "parent_repo_note": "the parent CNN-Mamba repo tracks nothing under overlock_yolo11; its index was not modified by this task"
   },
@@ -70,7 +73,7 @@
   "not_verified_in_the_clone": [
     "any GPU / NATTEN kernel result",
     "training or accuracy on real data (dataset and checkpoints live outside the repository)",
-    "that a remote is reachable -- no remote is configured by design, nothing was pushed"
+    "that the *server* can reach GitHub (no server exists yet; the clone was verified from this machine)"
   ],
   "isolation_findings": [
     {
@@ -79,5 +82,23 @@
       "fix": "the file-existence check now covers the selected ids only (escape checks unchanged); commit 15414c0",
       "found_by": "cloning the repository into a directory with no sibling folders and running the CLI there"
     }
-  ]
+  ],
+  "push_verification": {
+    "remote": "https://github.com/russliuw/overlock_yolo11.git",
+    "visibility": "private (as chosen by the user)",
+    "branch_pushed": "codex/overlock-yolo-portable",
+    "commit_pushed": "8daa8c2013e485d6ca94827bf38fe1c654c615d4",
+    "remote_files": 425,
+    "remote_commits": 8,
+    "forbidden_content_on_remote": [],
+    "verified_by": "git ls-remote (branch + commit) and a full `git clone --branch codex/overlock-yolo-portable` from GitHub",
+    "clone_from_github": {
+      "commit": "8daa8c2",
+      "files": 425,
+      "vendored_ultralytics_present": true,
+      "cli_train_help": "works",
+      "project_root_resolves_to_clone": true,
+      "ultralytics_root_resolves_to_clone_vendor": true
+    }
+  }
 }
