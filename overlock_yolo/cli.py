@@ -202,12 +202,24 @@ def build_from_config(cfg: dict, *, ultra_root: Optional[str] = None, weights: O
 
 
 def data_or_view(cfg: dict, explicit_data: Optional[str] = None) -> Optional[str]:
-    """The dataset entry point: an explicit view wins, then ``data.yaml``, then the COCO config."""
+    """The dataset entry point: an explicit view wins, then ``data.yaml``, then the COCO config.
+
+    A resolved path that does not exist is reported here, with the command that creates it,
+    instead of surfacing as an obscure failure deep inside the native dataloader.
+    """
     if explicit_data:
-        return os.path.abspath(os.path.expanduser(explicit_data))
-    if cfg.get("data", {}).get("view"):
-        return os.path.join(cfg["data"]["view"], "data.yaml")
-    return cfg["_resolved"]["data_yaml"].get("resolved")
+        path = os.path.abspath(os.path.expanduser(explicit_data))
+    elif cfg.get("data", {}).get("view"):
+        path = os.path.join(cfg["data"]["view"], "data.yaml")
+    else:
+        path = cfg["_resolved"]["data_yaml"].get("resolved")
+    if path and not os.path.isfile(path):
+        raise FileNotFoundError(
+            f"dataset entry point {path} does not exist. Build a view first, e.g. "
+            f"'python scripts/prepare_data.py --out <dir>' (add --limit-per-split 2 for a smoke view), "
+            f"then pass --view <dir> or --data <dir>/data.yaml."
+        )
+    return path
 
 
 def emit_summary(cfg: dict, path: Optional[str] = None) -> dict:
