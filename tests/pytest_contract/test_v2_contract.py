@@ -458,3 +458,70 @@ def test_adapter_channels_match_the_native_neck_entries():
             conv = getattr(model.stem, f"adapter{i + 1}").conv
             assert int(conv.in_channels) == entry["backbone_channels"]
             assert int(conv.out_channels) == entry["adapter_channels"]
+
+
+# ------------------------------------------------------------------- COCO view (DESIGN_V2 10.1)
+def test_limited_view_accepts_a_full_annotation_file():
+    """A smoke view must be buildable from the *full* COCO annotations.
+
+    The first isolation test of this repository found the opposite behaviour: ``validate_coco``
+    demanded that every annotated image exist on disk, so a 2-image view of a 5000-image split was
+    impossible unless the JSON was pre-trimmed.  Only the *selected* images are file-checked now;
+    path escapes are still checked for every entry and the selection is verified again in
+    ``build_view``.
+    """
+    import tempfile
+
+    from overlock_yolo.data import build_view, load_soda_config
+
+    try:
+        cfg = load_soda_config()
+    except Exception as exc:  # noqa: BLE001
+        pytest.skip(f"SODA10M not available: {exc}")
+    n_total = len(json.load(open(cfg["splits"]["val"]["annotations"]))["images"])
+    if n_total <= 2:
+        pytest.skip("the local SODA10M annotation file is already tiny")
+    with tempfile.TemporaryDirectory() as td:
+        report = build_view(os.path.join(td, "view"), limit_per_split=2, force=True)
+        for split in ("train", "val"):
+            entry = report["splits"][split]
+            assert entry["validation"]["image_files_checked"] == entry["n_images"]
+            assert "selected images only" in entry["validation"]["image_files_scope"]
+            assert entry["n_visible_images"] == entry["n_images"] == entry["n_label_files"]
+        assert report["source_cache_files_written"] == []
+
+
+def test_view_rejects_a_missing_selected_image():
+    """A selected image that is not on disk must still fail loudly (not be silently skipped)."""
+    import json as _json
+    import tempfile
+
+    import yaml as _yaml
+
+    from overlock_yolo.data import DataViewError, build_view
+
+    with tempfile.TemporaryDirectory() as td:
+        os.makedirs(os.path.join(td, "train"), exist_ok=True)
+        os.makedirs(os.path.join(td, "val"), exist_ok=True)
+        os.makedirs(os.path.join(td, "imgs"), exist_ok=True)
+        coco = {
+            "images": [{"id": 1, "file_name": "not_here.jpg", "width": 10, "height": 10}],
+            "annotations": [{"id": 1, "image_id": 1, "category_id": 1, "bbox": [1, 1, 4, 4], "area": 16}],
+            "categories": [{"id": 1, "name": "Pedestrian"}],
+        }
+        with open(os.path.join(td, "ann.json"), "w") as fh:
+            _json.dump(coco, fh)
+        config = {
+            "format": "coco",
+            "train": "imgs",
+            "val": "imgs",
+            "annotations": {"train": "ann.json", "val": "ann.json"},
+            "nc": 1,
+            "names": {0: "Pedestrian"},
+            "category_id_map": {1: 0},
+        }
+        yaml_path = os.path.join(td, "d.yaml")
+        with open(yaml_path, "w") as fh:
+            _yaml.safe_dump(config, fh)
+        with pytest.raises(DataViewError):
+            build_view(os.path.join(td, "view"), yaml_path=yaml_path, limit_per_split=1, force=True)

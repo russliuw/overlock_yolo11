@@ -117,8 +117,35 @@ def load_coco(annotation_path: str) -> dict:
     return data
 
 
-def validate_coco(coco: dict, cfg: dict, images_dir: str) -> dict:
-    """Fail-fast annotation validation; returns a summary of every check performed."""
+#: How many `<split>.cache` files the source scan reports before stopping.
+_MAX_CACHE_REPORT = 20
+
+
+def _source_cache_files(images_dir: str) -> List[str]:
+    """``*.cache`` files directly inside the source images directory (never a recursive walk).
+
+    Scanning the split directory of a real dataset (SODA10M: 5000 entries) is cheap, but a deep
+    walk is not, so only the top level is inspected.
+    """
+    try:
+        return sorted(
+            os.path.join(images_dir, name)
+            for name in os.listdir(images_dir)
+            if name.endswith(".cache")
+        )[:_MAX_CACHE_REPORT]
+    except OSError:
+        return []
+
+
+def validate_coco(coco: dict, cfg: dict, images_dir: str, *, check_files_for: Optional[set] = None) -> dict:
+    """Fail-fast annotation validation; returns a summary of every check performed.
+
+    ``check_files_for`` restricts the "image file exists" check to a set of image ids.  A limited
+    view (``--limit-per-split``) is built from the *full* annotation file, so demanding that every
+    annotated file be present on disk would make a perfectly valid partial view impossible; the
+    path-escape check always runs for every entry, and the selected images are still verified
+    (here and again in :func:`build_view`).
+    """
     img_ids = [int(im["id"]) for im in coco["images"]]
     dup = [i for i, n in Counter(img_ids).items() if n > 1]
     if dup:
@@ -169,6 +196,7 @@ def validate_coco(coco: dict, cfg: dict, images_dir: str) -> dict:
             stats["ignore"] += 1
         if x < 0 or y < 0:
             stats["negative_xy"] += 1
+    checked_files = 0
     for im in coco["images"]:
         fname = str(im["file_name"])
         if os.path.isabs(fname) or ".." in fname.replace("\\", "/").split("/"):
@@ -178,6 +206,9 @@ def validate_coco(coco: dict, cfg: dict, images_dir: str) -> dict:
         if not full.startswith(root + os.sep):
             escaped.append(fname)
             continue
+        if check_files_for is not None and int(im["id"]) not in check_files_for:
+            continue
+        checked_files += 1
         if not os.path.isfile(full):
             missing_files.append(fname)
 
@@ -189,6 +220,10 @@ def validate_coco(coco: dict, cfg: dict, images_dir: str) -> dict:
         raise DataViewError(f"{len(missing_files)} image file(s) missing, e.g. {missing_files[:5]}")
 
     return {
+        "image_files_checked": checked_files,
+        "image_files_scope": "all annotated images"
+        if check_files_for is None
+        else f"selected images only ({len(check_files_for)} ids)",
         "images": len(coco["images"]),
         "annotations": len(coco["annotations"]),
         "categories": names_by_id,
@@ -288,9 +323,9 @@ def build_view(
     for split in SPLITS:
         src = cfg["splits"][split]
         coco = load_coco(src["annotations"])
-        validation = validate_coco(coco, cfg, src["images_dir"])
         images = _select_images(coco["images"], limit_per_split)
         selected = {int(im["id"]) for im in images}
+        validation = validate_coco(coco, cfg, src["images_dir"], check_files_for=selected)
         anns_by_image: Dict[int, List[dict]] = {i: [] for i in selected}
         for ann in coco["annotations"]:
             iid = int(ann["image_id"])
@@ -454,7 +489,9 @@ def build_view(
         legacy = os.path.join(out_dir, "overlock_smoke_view.json")
         if os.path.isfile(legacy):
             os.remove(legacy)
-    report["source_cache_files_written"] = _find_cache_files([cfg["root"]])
+    report["source_cache_files_written"] = [
+        path for split in SPLITS for path in _source_cache_files(cfg["splits"][split]["images_dir"])
+    ]
     return report
 
 
@@ -504,24 +541,6 @@ def build_native_dataloader(
     img_path = data[mode]
     dataset = build_yolo_dataset(args, img_path, int(batch), data, mode=mode, stride=int(stride))
     return build_dataloader(dataset, int(batch), int(workers), shuffle=False, rank=-1, device=device)
-
-
-def _find_cache_files(roots: Sequence[str], limit: int = 20) -> List[str]:
-    """Any ``*.cache`` under the given roots (used to prove nothing was written to the source)."""
-    found: List[str] = []
-    for root in roots:
-        for dirpath, _dirs, files in os.walk(root):
-            if os.path.basename(dirpath).startswith("."):
-                continue
-            for name in files:
-                if name.endswith(".cache"):
-                    found.append(os.path.join(dirpath, name))
-                    if len(found) >= limit:
-                        return found
-            # do not descend into the (huge) image directories
-            if os.path.abspath(dirpath) == os.path.abspath(root):
-                _dirs[:] = [d for d in _dirs if d not in ("train", "val")]
-    return found
 
 
 # --------------------------------------------------------------------------------------
