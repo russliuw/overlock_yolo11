@@ -3,9 +3,9 @@
   "repository": {
     "path": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11",
     "branch": "codex/overlock-yolo-portable",
-    "commit": "2ef54da7943284269c5dcf806650614b15ffdfb3",
-    "short_commit": "2ef54da",
-    "n_commits": 4,
+    "commit": "15414c0",
+    "short_commit": "15414c0",
+    "n_commits": 6,
     "tracked_files": 425,
     "git_dir_bytes": 3235840,
     "remotes_configured": [],
@@ -71,5 +71,13 @@
     "any GPU / NATTEN kernel result",
     "training or accuracy on real data (dataset and checkpoints live outside the repository)",
     "that a remote is reachable -- no remote is configured by design, nothing was pushed"
+  ],
+  "isolation_findings": [
+    {
+      "finding": "a --limit-per-split view could not be built from a full COCO annotation file",
+      "cause": "validate_coco required every annotated image to exist on disk",
+      "fix": "the file-existence check now covers the selected ids only (escape checks unchanged); commit 15414c0",
+      "found_by": "cloning the repository into a directory with no sibling folders and running the CLI there"
+    }
   ]
 }

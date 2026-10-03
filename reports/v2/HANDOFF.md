@@ -116,7 +116,7 @@ explicitly random structures.
 |---|---|
 | Path | `/Users/lw/Documents/CNN-Mamba/overlock_yolo11` (its own `.git`; the parent `CNN-Mamba` repo tracks nothing here and its index was not modified) |
 | Branch | `codex/overlock-yolo-portable` |
-| HEAD | `2ef54da` (`2ef54da7943284269c5dcf806650614b15ffdfb3`), 4 commits (the clone verification itself ran at `0b7c3e8`) |
+| HEAD | `15414c0`, 6 commits (the clone verification ran at `0b7c3e8`; a later isolation test found and fixed one more defect) |
 | Tracked files | 425 (63 project files + 362 vendored Ultralytics files) |
 | `.git` size | 3.1 MB; largest tracked blob 206,847 B; **no file > 1 MB** |
 | Remote | **none configured** — nothing was pushed or published |
