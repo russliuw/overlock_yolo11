@@ -113,7 +113,16 @@ def main(argv=None) -> int:
         rep.add("torchvision", "fail", f"{type(exc).__name__}: {exc}", fix="install torchvision==0.20.1")
 
     # --- other dependencies -----------------------------------------------------------
-    for name, required in (("natten", True), ("timm", True), ("einops", True), ("yaml", True), ("PIL", True)):
+    # NATTEN is required only when this run is meant to certify a GPU box; on a CPU check its
+    # absence is a warning (the detector then uses the bundled differentiable reference).
+    dep_required = {
+        "natten": bool(args.expect_gpu),
+        "timm": True,
+        "einops": True,
+        "yaml": True,
+        "PIL": True,
+    }
+    for name, required in dep_required.items():
         try:
             mod = __import__(name)
             version = getattr(mod, "__version__", "unknown")
@@ -129,6 +138,8 @@ def main(argv=None) -> int:
             if name == "natten":
                 fix = (f"python -m pip install 'natten==0.17.4+torch250cu124' --only-binary=:all: --no-deps "
                        f"-f {NATTEN_INDEX}")
+                if not required:
+                    fix += "  (only needed for the GPU runs; 'auto' on CPU uses the reference)"
             rep.add(name, "fail" if required else "warn", f"{type(exc).__name__}: {exc}", fix=fix, required=required)
 
     # --- pinned ultralytics source ----------------------------------------------------

@@ -27,8 +27,8 @@ from overlock_yolo.checkpoint import (  # noqa: E402
     sha256_file,
     strip_known_prefixes,
 )
+from overlock_yolo import data as _data  # noqa: E402
 from overlock_yolo.data import (  # noqa: E402
-    DEFAULT_YAML,
     DataViewError,
     build_view,
     coco_bbox_to_yolo,
@@ -39,7 +39,25 @@ from overlock_yolo.data import (  # noqa: E402
     yolo_bbox_to_coco,
 )
 
-CHECKPOINT = "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/checkpoints/overlock_b_in1k_224.pth"
+#: The SODA10M COCO config and the OverLoCK checkpoints live *outside* this repository.  They are
+#: required for the data/checkpoint tests but must never be downloaded, so the tests that need
+#: them are skipped (with the probed paths) on a machine that does not have them.
+_SODA_CONFIG = None
+try:
+    _SODA_CONFIG = _data.resolve_data_yaml()
+except Exception:  # noqa: BLE001 - the reason is reported by the skip messages below
+    _SODA_CONFIG = None
+DEFAULT_YAML = _SODA_CONFIG  # kept for compatibility with the V1 test bodies
+
+from overlock_yolo.paths import resolve_checkpoint_path as _resolve_checkpoint  # noqa: E402
+
+CHECKPOINT = _resolve_checkpoint("b") or "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/checkpoints/overlock_b_in1k_224.pth"
+_MISSING = []
+if _SODA_CONFIG is None:
+    _MISSING.append("SODA10M soda10m.yaml (--yaml/--data-yaml or OVERLOCK_DATA_ROOT)")
+if not os.path.isfile(CHECKPOINT):
+    _MISSING.append(f"OverLoCK-B checkpoint ({CHECKPOINT})")
+requires_external = unittest.skipUnless(not _MISSING, "external resources not present here: " + "; ".join(_MISSING))
 
 
 class TestBBoxTransforms(unittest.TestCase):
@@ -100,6 +118,7 @@ def _mini_coco(images, annotations=None, categories=None):
     }
 
 
+@requires_external
 class TestSodaConfigAndCoco(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -161,6 +180,7 @@ class TestSodaConfigAndCoco(unittest.TestCase):
             validate_coco(mini, self.cfg, self.cfg["splits"]["train"]["images_dir"])
 
 
+@requires_external
 class TestDataView(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -383,6 +403,7 @@ class TestCheckpointSafety(unittest.TestCase):
             with self.assertRaises(CheckpointError):
                 audit_and_load(model, p, allow_missing_prefixes=())
 
+    @requires_external
     def test_real_checkpoint_sha_and_container(self):
         if not os.path.isfile(CHECKPOINT):
             self.skipTest(f"checkpoint not present: {CHECKPOINT}")
