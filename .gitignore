@@ -1,0 +1,55 @@
+# --- weights / model binaries: never committed ------------------------------------------
+*.pth
+*.pt
+*.pth.tar
+*.ckpt
+*.safetensors
+*.onnx
+*.engine
+*.mlpackage
+*.tflite
+*.torchscript
+
+# --- data, image views and dataset caches ------------------------------------------------
+# data/soda_smoke holds symlinks to the real SODA10M images; only the small generator
+# (overlock_yolo/data.py) is tracked.
+data/soda_smoke/
+data/soda_full/
+data/*/images/
+data/*/labels/
+*.cache
+*.npy
+
+# --- generated artifacts, logs, runs ------------------------------------------------------
+artifacts/
+logs/
+runs/
+*.log
+reports/v2/_*.json           # scratch output of an ad-hoc run
+# curated profile reports ARE tracked (reports/v2/profile_*.json + .md)
+
+# --- machine-local config and caches ------------------------------------------------------
+cache/
+.env
+*.local.yaml
+*.local.yml
+
+# --- python ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# --- editors / OS ------------------------------------------------------------------------
+.DS_Store
+.idea/
+.vscode/
+
+# --- local environment / reports that are regenerated ------------------------------------
+# keep: reports/v2/*.json (curated), reports/v2/HANDOFF.md
+# the raw runner logs live in artifacts/ (ignored above)

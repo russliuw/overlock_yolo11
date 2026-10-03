@@ -1,0 +1,58 @@
+{
+  "purpose": "Manifest of the checkpoints this project expects. NO checkpoint is committed to Git; place the files at the listed locations (or pass --weights) before running anything with pretrained=true.",
+  "never_downloaded": "This project never downloads weights. Missing XT/S checkpoints are a hard failure unless backbone.pretrained=false is set explicitly.",
+  "safe_loading": "All backbone checkpoints are loaded with torch.load(path, map_location='cpu', weights_only=True); a failure is never downgraded to weights_only=False.",
+  "checkpoints": [
+    {
+      "variant": "t",
+      "filename": "overlock_t_in1k_224.pth",
+      "expected_locations": [
+        "<overlock_source_root>/checkpoints/overlock_t_in1k_224.pth",
+        "<project_root>/checkpoints/overlock_t_in1k_224.pth"
+      ],
+      "env_var": "OVERLOCK_SOURCE_ROOT points at the official OverLoCK-main checkout",
+      "kind": "ImageNet-1K classification state_dict (backbone + classification head)",
+      "upstream": "https://github.com/LMMMEng/OverLoCK/releases/download/v1/overlock_t_in1k_224.pth",
+      "size_bytes": 141560021,
+      "sha256": "40c7ef3e0438cdbe026de76cfe2830b8844d1c732dc3b4cb1b046c191ec1ca13",
+      "sha256_note": "recorded from the local file by checkpoint.sha256_file; re-verify the server copy with scripts/smoke.py M05",
+      "verified_locally": true,
+      "loaded_in_this_round": true
+    },
+    {
+      "variant": "b",
+      "filename": "overlock_b_in1k_224.pth",
+      "expected_locations": [
+        "<overlock_source_root>/checkpoints/overlock_b_in1k_224.pth",
+        "<project_root>/checkpoints/overlock_b_in1k_224.pth"
+      ],
+      "kind": "ImageNet-1K classification state_dict (backbone + classification head)",
+      "upstream": "https://github.com/LMMMEng/OverLoCK/releases/download/v1/overlock_b_in1k_224.pth",
+      "size_bytes": 395257645,
+      "sha256": "558b8b79c205c10f13e42d0ee22a8309e248fd6ab76a7ef40b4e0141c71481e8",
+      "verified_locally": true,
+      "loaded_in_this_round": true
+    },
+    {
+      "variant": "xt",
+      "filename": "overlock_xt_in1k_224.pth",
+      "kind": "not downloaded by design",
+      "verified_locally": false,
+      "loaded_in_this_round": false,
+      "note": "XT has no local checkpoint; only explicitly random structure tests (backbone.pretrained=false) are run for it."
+    },
+    {
+      "variant": "s",
+      "filename": "overlock_s_in1k_224.pth",
+      "kind": "not downloaded by design",
+      "verified_locally": false,
+      "loaded_in_this_round": false,
+      "note": "S has no local checkpoint; only explicitly random structure tests (backbone.pretrained=false) are run for it."
+    }
+  ],
+  "classification_only_keys_ignored": ["head.*", "aux_head.*"],
+  "detection_only_keys_allowed_missing": {
+    "prefixes": ["extra_norm.", "h_proj."],
+    "meaning": "The classification checkpoint simply does not contain these detection-only parameters, so they keep their initialisation. This is NOT the V1 claim that they were 'unused by the forward pass and therefore absent from state_dict' -- that causal explanation was wrong."
+  }
+}

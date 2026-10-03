@@ -1,0 +1,64 @@
+# OverLoCK-T + native YOLO11s neck/head, 640x640, SODA10M (nc=6).
+#
+# This is the DEFAULT experiment for this project.
+#
+# Relative paths are interpreted relative to the PROJECT ROOT (the repository this file lives
+# in), never relative to the current working directory, and never relative to the config file.
+# `${PROJECT_ROOT}` (and the environment variables in overlock_yolo/paths.py) may be used for
+# clarity.  CLI arguments override these values; a value absent from the CLI never overrides the
+# file.  Nothing is downloaded automatically.
+
+backbone:
+  family: overlock
+  variant: t
+  weights: ${PROJECT_ROOT}/../OverLoCK-main/checkpoints/overlock_t_in1k_224.pth
+  pretrained: true
+  deploy: false # reparameterised/fused structures are refused
+  attention_backend: auto # auto -> NATTEN on CUDA, differentiable PyTorch reference on CPU
+  row_chunk: 0 # 0 = all rows per matmul; >0 bounds the reference's largest intermediate
+  strict_shape: true
+  freeze: false
+  lr_mult: 1.0
+  bn_eval: false
+  strict_weights: true
+
+yolo:
+  family: yolo11
+  scale: s # architecture spec (n/s/m/l/x) -- NOT the augmentation scale
+  nc: 6
+  names:
+    0: Pedestrian
+    1: Cyclist
+    2: Car
+    3: Truck
+    4: Tram
+    5: Tricycle
+
+runtime:
+  device: cpu # use 0 on the GPU server
+  workers: 0 # 8 on the GPU server
+  seed: 0
+  torch_threads: null
+  verbose: false
+
+train:
+  imgsz: 640
+  rect: false # rejected if true: the protocol is exactly 640x640
+  multi_scale: false # rejected if true
+  scale: 0.5 # native geometric augmentation factor (train.scale, a float)
+  amp: false
+  epochs: 100
+  batch: 16
+  optimizer: auto
+  lr0: null
+  weight_decay: null
+  val_scaleup: false # native validation default (only scale down, then pad to 640)
+  conf: null # null -> native detection default 0.001
+  iou: null # null -> native default 0.7
+  max_det: null # null -> native default 300
+  nms: null # null -> the family default (11: NMS, 26: end-to-end)
+
+data:
+  yaml: ${PROJECT_ROOT}/../data/SODA10M/soda10m.yaml
+  view: ${PROJECT_ROOT}/data/soda_smoke # generated native YOLO view (rebuild for real training)
+  limit_per_split: null

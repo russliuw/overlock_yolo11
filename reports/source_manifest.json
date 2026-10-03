@@ -1,0 +1,142 @@
+{
+  "generated_by": "manual assembly from read-only inspection (no recursive scans)",
+  "read_only_sources": [
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/detection/models/overlock.py",
+      "role": "official OverLoCK detection backbone (vendored as an isolated adapter)",
+      "exists": true,
+      "size_bytes": 33888,
+      "sha256": "9671034deda4fd62f34f9465d6e1f475616db168a4c19c87a05fd65e1288aa61",
+      "note": "SHA256 verified before and after implementation; the original file is never modified",
+      "vendored_copy": "overlock_yolo11/overlock_yolo/backbone.py"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/models/overlock.py",
+      "role": "official OverLoCK classification variant (used only to compare the overlock_b config and to reason about checkpoint keys)",
+      "exists": true,
+      "size_bytes": 35650,
+      "sha256": "2b8d57645b9058ee0abe68707cad0695533426af3f09fe6b70b3fcccfe20c9c9",
+      "note": "same depth/sub_depth/embed_dim/kernel_size/mlp_ratio/sub_num_heads/sub_mlp_ratio as the detection overlock_b factory"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/checkpoints/overlock_b_in1k_224.pth",
+      "role": "pretrained OverLoCK-Base weights (loaded with weights_only=True)",
+      "exists": true,
+      "size_bytes": 395257645,
+      "sha256": "558b8b79c205c10f13e42d0ee22a8309e248fd6ab76a7ef40b4e0141c71481e8"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/ultralytics-main",
+      "role": "local Ultralytics source root used for every native module (pinned on sys.path, asserted at import)",
+      "exists": false
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/ultralytics-main/ultralytics/cfg/models/11/yolo11.yaml",
+      "role": "native YOLO11 model definition; scale forced to 's' post-load",
+      "exists": true,
+      "size_bytes": 2012,
+      "sha256": "43d8a7c86acc77282ddf4966d6526e091e5b064c140ed4a6e4c0b68ecbc3784c"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/ultralytics-main/ultralytics/nn/tasks.py",
+      "role": "parse_model / BaseModel / DetectionModel / _predict_once contract",
+      "exists": true,
+      "size_bytes": 98358,
+      "sha256": "c1da24859fd56b9869759bd4bfb753456c9074bfc3238b51a08ea3c6cbeda1ae"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/ultralytics-main/ultralytics/nn/modules/head.py",
+      "role": "Detect(nc, reg_max, end2end, ch=...) contract, bias_init, stride handling",
+      "exists": true,
+      "size_bytes": 84603,
+      "sha256": "1dc4a4a90401149edeb55cd679e7f33be2c36eae1317b6f67f13c7a8b18d60b8"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/ultralytics-main/ultralytics/utils/loss.py",
+      "role": "v8DetectionLoss contract (dict preds, loss vector x batch_size, detached dict)",
+      "exists": true,
+      "size_bytes": 71880,
+      "sha256": "357053aa9a24ad2c4d541c3ada3a27232a10d679f89c7b4957b9a84a7da4ec1d"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/ultralytics-main/ultralytics/models/yolo/detect/train.py",
+      "role": "DetectionTrainer subclassing target",
+      "exists": true,
+      "size_bytes": 12440,
+      "sha256": "76d6b181259edc09b03f7cea1f9d59bd4eda2f7964146bbb2e76d4f7201dcf5f"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/soda10m.yaml",
+      "role": "SODA10M COCO-format data config (nc=6, category_id_map)",
+      "exists": true,
+      "size_bytes": 422,
+      "sha256": "6d817ec6b07d7cf97fef489c148c9f11543732d9eaaa5e5d227e2600182ce584"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/annotations/instance_train.json",
+      "role": "train annotations (read for metadata + the smoke view only)",
+      "exists": true,
+      "size_bytes": 5298741,
+      "sha256": "466795449573f3e5f290522c9b0c3de78cd523be1f6ea3331044e6f26eb16be2"
+    },
+    {
+      "path": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/annotations/instance_val.json",
+      "role": "val annotations (read for metadata + the smoke view only)",
+      "exists": true,
+      "size_bytes": 4859623,
+      "sha256": "b6553208c7b742f0bd841df7e223224e6ee4f7801aa432e1dd1dbe3a580dd4c6"
+    }
+  ],
+  "vendored_copy": {
+    "new_file": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/overlock_yolo/backbone.py",
+    "sha256": "34527d5f929317eec8c8cf390981375395b0f83862513702441c3b64ca273587",
+    "upstream_sha256": "9671034deda4fd62f34f9465d6e1f475616db168a4c19c87a05fd65e1288aa61",
+    "license_and_credit": "OverLoCK (https://arxiv.org/abs/2502.20087, LMMMEng/OverLoCK) license applies; apply_rpb is upstream-borrowed from https://tinyurl.com/mrbub4t3 ; DilatedReparamBlock follows UniRepLKNet (https://github.com/AILab-CVC/UniRepLKNet)",
+    "modifications": [
+      "provenance docstring added",
+      "mmdet/mmcv/mmengine registry + logger + load_checkpoint imports removed; explicit factory build_overlock_b instead of @MODELS.register_module()",
+      "natten.functional.na2d_av replaced by an explicit backend hook (attention_backend.py)",
+      "classification head/aux_head construction removed (upstream builds then unconditionally deletes them)",
+      "pretrained=<download URL> bodies removed; weights loaded only via the audited loader",
+      "torch.utils.checkpoint import made version tolerant",
+      "added forward_multiscale() (== forward_features + an output-signature assertion) and attention_backend_report()",
+      "to_2tuple inlined into get_conv2d; DropPath imported from timm"
+    ],
+    "unchanged": "depth, sub_depth, embed_dim, kernel_size, mlp_ratio, sub_mlp_ratio, sub_num_heads, smk_size, deploy, use_gemm, drop rates, use_checkpoint, overview/focus branches, high_level_proj, patch_embedx, h_proj, relative position bias (apply_rpb), both softmaxes, small-feature interpolate-and-restore, extra_norm placement, _init_weights, module/parameter names"
+  },
+  "design_document": {
+    "source": "/Users/lw/Desktop/ieeeaccessyolo/OverLoCK_Base_YOLO11s_Design_DeepSeekFlash_20261003.md",
+    "sha256": "eac0cea216cdc8e9611a5aa659479e96d3f5702297e28b4396d0ecf5c3f6f0b0",
+    "copy_in_task_dir": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/DESIGN.md",
+    "copy_sha256": "eac0cea216cdc8e9611a5aa659479e96d3f5702297e28b4396d0ecf5c3f6f0b0",
+    "note": "re-synced at the end of the round: the source file gained an 11-line '## 12. \u6d3e\u53d1\u8bb0\u5f55' dispatch-log appendix after the initial copy; the design/acceptance content (sections 1-11) is unchanged. The copy is byte-identical to the current source."
+  },
+  "environment": {
+    "python": "3.10.20",
+    "platform": "macOS-26.3.2-arm64-arm-64bit"
+  },
+  "not_modified": [
+    "OverLoCK-main/**",
+    "ultralytics-main/**",
+    "data/**",
+    "architecture_v1/**"
+  ],
+  "new_module_hashes": {
+    "overlock_yolo/__init__.py": "433872b62dd784817a87c779fe19494335fc0a2dfd5b3095a7b8ac0d7d570ae1",
+    "overlock_yolo/attention_backend.py": "8451e916b3a30e76327d0e0ce91824b5db4966a1fd8e8f64375aa0de7411637d",
+    "overlock_yolo/backbone.py": "34527d5f929317eec8c8cf390981375395b0f83862513702441c3b64ca273587",
+    "overlock_yolo/checkpoint.py": "82b0d3ef1c271579bd806e650147e16e4f41a1795ed752ee2a90827e5d7bb65a",
+    "overlock_yolo/data.py": "0aaaf5201c86308f5a80c1cfc9a668737853964da510cc69bb3d6576c303b69a",
+    "overlock_yolo/model.py": "a3ee90921acf130c11a11f552d20584e431872e3e88ee7fd3513b81160481d61",
+    "overlock_yolo/trainer.py": "8d5c53e61c675fb584b773075e3ae41067d8f64501343d4eecb1b37bb946dbfa",
+    "scripts/prepare_data.py": "5f0f5758cc3b9885d14e3031f6d319b57ef496ecb66430d723de6f5e5097436e",
+    "scripts/smoke.py": "671e80550a3a0b819b89e99e7c13540353824e031b4dc54cfde37711bb08b7d8",
+    "scripts/train.py": "1675d2d2eb5b235368c63246fb8725b6f3aef732852e67ecc8db0ee2adad2923",
+    "tests/test_attention_backend.py": "3acf2b8b526a5f0a4f4196ec4573155d7f83d809904cafd665884dd1b1acb458",
+    "tests/test_data_and_loading.py": "8ec937f7bfbf36288fc970ab780702259d84c70c7b3beaba67c6277c432f4f20",
+    "tests/test_neck_contract.py": "6f4aa0da4fc061e5378e30a07a0fb0f3f4d2d2bfac24015ae0f7eea775450dd7",
+    "configs/overlock_b_yolo11s_soda.yaml": "644a93334231429e7061f8cb8c925440d6e54cf8681534e0e814feca94b33019",
+    "README.md": "73be0b52b17dcba7bcd8176a2b4683377b45a97e9780420bc1ad7797ee561f59",
+    "DESIGN.md": "eac0cea216cdc8e9611a5aa659479e96d3f5702297e28b4396d0ecf5c3f6f0b0"
+  }
+}

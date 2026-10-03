@@ -1,0 +1,40 @@
+# Server requirements (target: Ubuntu 22.04 / Python 3.12 / RTX 4090 / CUDA 12.4).
+#
+# This file is a *template*: check the image first.  If torch/torchvision are already at the
+# pinned versions, keep them and install only what is missing.  Never run a blanket
+# `pip install -U` here -- see constraints-server.txt.
+#
+#   Step 0 (read-only, always first):  python scripts/server_preflight.py --expect-gpu
+#
+#   Step 1: only if `torch` is missing or not 2.5.1+cu124
+#     python -m pip install torch==2.5.1 torchvision==0.20.1 \
+#         --index-url https://download.pytorch.org/whl/cu124
+#
+#   Step 2: only if `natten` is missing or not 0.17.4+torch250cu124
+#     python -m pip install 'natten==0.17.4+torch250cu124' --only-binary=:all: --no-deps \
+#         -f https://whl.natten.org/old/
+#
+#   Step 3: everything else, always constrained
+#     python -m pip install -c constraints-server.txt -r requirements-server.txt
+#
+# Verified availability (not verified on the target GPU -- that is what the preflight and
+# scripts/gpu_smoke.py are for):
+#   * torch 2.5.1 + torchvision 0.20.1 cu124 wheels exist (pytorch.org previous-versions matrix)
+#   * natten-0.17.4+torch250cu124-cp312-cp312-linux_x86_64.whl exists on whl.natten.org/old/
+#   * NATTEN 0.17.4 still exposes na2d_av
+#
+# Minimal fallback if a dependency still blocks Python 3.12: create a *separate* Python 3.10
+# environment on the server.  Do not silently swap the whole stack for one import failure.
+
+# --- inference/training dependencies of this project ------------------------------------
+einops>=0.7,<0.9
+timm>=0.6.13,<1.1        # 0.6.13 is the minimal-fix candidate for the py3.11+ dataclass issue
+PyYAML>=6,<7
+Pillow>=10,<12
+numpy>=1.26,<3
+scipy>=1.11,<2
+psutil>=5.9,<8
+thop>=0.1.1,<0.2        # partial MACs profiling only; the report is labelled partial
+matplotlib>=3.8,<4      # Ultralytics imports it for plots; plots are disabled in this project
+pandas>=2.1,<3
+requests>=2.31,<3

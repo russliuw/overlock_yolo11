@@ -1,0 +1,1092 @@
+{
+  "generated_by": "scripts/report_environment.py",
+  "package_version": "2.0.0",
+  "design": "DESIGN_V2.md",
+  "verdict": "structure + native interface implemented and CPU-verified; target GPU, AMP, full-data training and every AP number remain UNVERIFIED",
+  "overlock_source": {
+    "upstream_file": "OverLoCK-main/detection/models/overlock.py",
+    "upstream_repo": "https://github.com/LMMMEng/OverLoCK",
+    "paper": "https://arxiv.org/abs/2502.20087",
+    "variants": "xt/t/s/b (detection / mmdet factory bodies, lines 861-946)",
+    "vendored_as": "overlock_yolo/backbone.py (isolated copy; nothing in OverLoCK-main is modified)"
+  },
+  "backbone_variant_table": {
+    "xt": {
+      "depth": [
+        2,
+        2,
+        3,
+        2
+      ],
+      "sub_depth": [
+        6,
+        2
+      ],
+      "embed_dim": [
+        56,
+        112,
+        256,
+        336
+      ],
+      "kernel_size": [
+        17,
+        15,
+        13,
+        7
+      ],
+      "mlp_ratio": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "sub_num_heads": [
+        4,
+        6
+      ],
+      "sub_mlp_ratio": [
+        3,
+        3
+      ]
+    },
+    "t": {
+      "depth": [
+        4,
+        4,
+        6,
+        2
+      ],
+      "sub_depth": [
+        12,
+        2
+      ],
+      "embed_dim": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "kernel_size": [
+        17,
+        15,
+        13,
+        7
+      ],
+      "mlp_ratio": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "sub_num_heads": [
+        4,
+        8
+      ],
+      "sub_mlp_ratio": [
+        3,
+        3
+      ]
+    },
+    "s": {
+      "depth": [
+        6,
+        6,
+        8,
+        3
+      ],
+      "sub_depth": [
+        16,
+        3
+      ],
+      "embed_dim": [
+        64,
+        128,
+        320,
+        512
+      ],
+      "kernel_size": [
+        17,
+        15,
+        13,
+        7
+      ],
+      "mlp_ratio": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "sub_num_heads": [
+        8,
+        16
+      ],
+      "sub_mlp_ratio": [
+        3,
+        3
+      ]
+    },
+    "b": {
+      "depth": [
+        8,
+        8,
+        10,
+        4
+      ],
+      "sub_depth": [
+        20,
+        4
+      ],
+      "embed_dim": [
+        80,
+        160,
+        384,
+        576
+      ],
+      "kernel_size": [
+        17,
+        15,
+        13,
+        7
+      ],
+      "mlp_ratio": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "sub_num_heads": [
+        6,
+        9
+      ],
+      "sub_mlp_ratio": [
+        3,
+        3
+      ]
+    }
+  },
+  "backbone_feature_info": {
+    "xt": [
+      [
+        4,
+        56
+      ],
+      [
+        8,
+        112
+      ],
+      [
+        16,
+        340
+      ],
+      [
+        32,
+        420
+      ]
+    ],
+    "t": [
+      [
+        4,
+        64
+      ],
+      [
+        8,
+        128
+      ],
+      [
+        16,
+        384
+      ],
+      [
+        32,
+        640
+      ]
+    ],
+    "s": [
+      [
+        4,
+        64
+      ],
+      [
+        8,
+        128
+      ],
+      [
+        16,
+        448
+      ],
+      [
+        32,
+        640
+      ]
+    ],
+    "b": [
+      [
+        4,
+        80
+      ],
+      [
+        8,
+        160
+      ],
+      [
+        16,
+        528
+      ],
+      [
+        32,
+        720
+      ]
+    ]
+  },
+  "backbone_p3p4p5": {
+    "xt": [
+      112,
+      340,
+      420
+    ],
+    "t": [
+      128,
+      384,
+      640
+    ],
+    "s": [
+      128,
+      448,
+      640
+    ],
+    "b": [
+      160,
+      528,
+      720
+    ]
+  },
+  "yolo_family_contract": {
+    "yolo11": {
+      "reg_max": 16,
+      "branches": "one-to-many",
+      "criterion": "v8DetectionLoss",
+      "nms": true
+    },
+    "yolo26": {
+      "reg_max": 1,
+      "branches": "one-to-many+one-to-one",
+      "criterion": "E2ELoss",
+      "nms": false
+    }
+  },
+  "native_yaml_relpath": {
+    "yolo11": [
+      "ultralytics",
+      "cfg",
+      "models",
+      "11",
+      "yolo11.yaml"
+    ],
+    "yolo26": [
+      "ultralytics",
+      "cfg",
+      "models",
+      "26",
+      "yolo26.yaml"
+    ]
+  },
+  "native_tail_measurements": {
+    "yolo11n": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        128,
+        128,
+        256
+      ],
+      "detect_entry_channels": [
+        64,
+        128,
+        256
+      ],
+      "reg_max": 16,
+      "has_one2one": false,
+      "tail_parameters": 1225538,
+      "c3k_per_layer": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "block_kinds_per_layer": [
+        [
+          "Bottleneck"
+        ],
+        [
+          "Bottleneck"
+        ],
+        [
+          "Bottleneck"
+        ],
+        [
+          "C3k"
+        ]
+      ]
+    },
+    "yolo11s": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        256,
+        256,
+        512
+      ],
+      "detect_entry_channels": [
+        128,
+        256,
+        512
+      ],
+      "reg_max": 16,
+      "has_one2one": false,
+      "tail_parameters": 3988130,
+      "c3k_per_layer": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "block_kinds_per_layer": [
+        [
+          "Bottleneck"
+        ],
+        [
+          "Bottleneck"
+        ],
+        [
+          "Bottleneck"
+        ],
+        [
+          "C3k"
+        ]
+      ]
+    },
+    "yolo11m": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        512,
+        512,
+        512
+      ],
+      "detect_entry_channels": [
+        256,
+        512,
+        512
+      ],
+      "reg_max": 16,
+      "has_one2one": false,
+      "tail_parameters": 9705442,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ]
+      ]
+    },
+    "yolo11l": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        512,
+        512,
+        512
+      ],
+      "detect_entry_channels": [
+        256,
+        512,
+        512
+      ],
+      "reg_max": 16,
+      "has_one2one": false,
+      "tail_parameters": 12481506,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ]
+      ]
+    },
+    "yolo11x": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        768,
+        768,
+        768
+      ],
+      "detect_entry_channels": [
+        384,
+        768,
+        768
+      ],
+      "reg_max": 16,
+      "has_one2one": false,
+      "tail_parameters": 28033378,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ]
+      ]
+    },
+    "yolo26n": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        128,
+        128,
+        256
+      ],
+      "detect_entry_channels": [
+        64,
+        128,
+        256
+      ],
+      "reg_max": 1,
+      "has_one2one": true,
+      "tail_parameters": 1140668,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "Bottleneck",
+          "PSABlock",
+          "Sequential"
+        ]
+      ]
+    },
+    "yolo26s": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        256,
+        256,
+        512
+      ],
+      "detect_entry_channels": [
+        128,
+        256,
+        512
+      ],
+      "reg_max": 1,
+      "has_one2one": true,
+      "tail_parameters": 4510524,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "Bottleneck",
+          "PSABlock",
+          "Sequential"
+        ]
+      ]
+    },
+    "yolo26m": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        512,
+        512,
+        512
+      ],
+      "detect_entry_channels": [
+        256,
+        512,
+        512
+      ],
+      "reg_max": 1,
+      "has_one2one": true,
+      "tail_parameters": 11429948,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "Bottleneck",
+          "PSABlock",
+          "Sequential"
+        ]
+      ]
+    },
+    "yolo26l": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        512,
+        512,
+        512
+      ],
+      "detect_entry_channels": [
+        256,
+        512,
+        512
+      ],
+      "reg_max": 1,
+      "has_one2one": true,
+      "tail_parameters": 13351996,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "Bottleneck",
+          "PSABlock",
+          "Sequential"
+        ]
+      ]
+    },
+    "yolo26x": {
+      "tail_start": 11,
+      "neck_entry_channels": [
+        768,
+        768,
+        768
+      ],
+      "detect_entry_channels": [
+        384,
+        768,
+        768
+      ],
+      "reg_max": 1,
+      "has_one2one": true,
+      "tail_parameters": 29975100,
+      "c3k_per_layer": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "block_kinds_per_layer": [
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "C3k"
+        ],
+        [
+          "Bottleneck",
+          "PSABlock",
+          "Sequential"
+        ]
+      ]
+    }
+  },
+  "adapter_map_examples": {
+    "t+yolo11s": [
+      {
+        "level": "P3",
+        "stride": 8,
+        "backbone_channels": 128,
+        "adapter_channels": 256
+      },
+      {
+        "level": "P4",
+        "stride": 16,
+        "backbone_channels": 384,
+        "adapter_channels": 256
+      },
+      {
+        "level": "P5",
+        "stride": 32,
+        "backbone_channels": 640,
+        "adapter_channels": 512
+      }
+    ],
+    "t+yolo11n": [
+      {
+        "level": "P3",
+        "stride": 8,
+        "backbone_channels": 128,
+        "adapter_channels": 128
+      },
+      {
+        "level": "P4",
+        "stride": 16,
+        "backbone_channels": 384,
+        "adapter_channels": 128
+      },
+      {
+        "level": "P5",
+        "stride": 32,
+        "backbone_channels": 640,
+        "adapter_channels": 256
+      }
+    ],
+    "b+yolo26x": [
+      {
+        "level": "P3",
+        "stride": 8,
+        "backbone_channels": 160,
+        "adapter_channels": 768
+      },
+      {
+        "level": "P4",
+        "stride": 16,
+        "backbone_channels": 528,
+        "adapter_channels": 768
+      },
+      {
+        "level": "P5",
+        "stride": 32,
+        "backbone_channels": 720,
+        "adapter_channels": 768
+      }
+    ]
+  },
+  "combinations": [
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "combination": "xt+yolo11n"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "combination": "xt+yolo11s"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "combination": "xt+yolo11m"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "combination": "xt+yolo11l"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "combination": "xt+yolo11x"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "combination": "xt+yolo26n"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "combination": "xt+yolo26s"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "combination": "xt+yolo26m"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "combination": "xt+yolo26l"
+    },
+    {
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "combination": "xt+yolo26x"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "combination": "t+yolo11n"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "combination": "t+yolo11s"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "combination": "t+yolo11m"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "combination": "t+yolo11l"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "combination": "t+yolo11x"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "combination": "t+yolo26n"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "combination": "t+yolo26s"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "combination": "t+yolo26m"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "combination": "t+yolo26l"
+    },
+    {
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "combination": "t+yolo26x"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "combination": "s+yolo11n"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "combination": "s+yolo11s"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "combination": "s+yolo11m"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "combination": "s+yolo11l"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "combination": "s+yolo11x"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "combination": "s+yolo26n"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "combination": "s+yolo26s"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "combination": "s+yolo26m"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "combination": "s+yolo26l"
+    },
+    {
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "combination": "s+yolo26x"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "combination": "b+yolo11n"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "combination": "b+yolo11s"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "combination": "b+yolo11m"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "combination": "b+yolo11l"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "combination": "b+yolo11x"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "combination": "b+yolo26n"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "combination": "b+yolo26s"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "combination": "b+yolo26m"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "combination": "b+yolo26l"
+    },
+    {
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "combination": "b+yolo26x"
+    }
+  ],
+  "n_combinations": 40,
+  "ultralytics": {
+    "resolved_root": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/vendor/ultralytics",
+    "vendored_snapshot": true,
+    "vendor_tree": {
+      "root": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/vendor/ultralytics/ultralytics",
+      "files": 362,
+      "combined_sha256": "72cc231163ac224b9073a874e1ee565c12cd275c3e2231483d31604ab98794a2"
+    },
+    "import_origin": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/vendor/ultralytics/ultralytics/__init__.py",
+    "version": "8.4.148",
+    "license": "AGPL-3.0 (see THIRD_PARTY_NOTICES.md)",
+    "default_resolution_order": [
+      "--ultralytics-root",
+      "$OVERLOCK_ULTRALYTICS_ROOT",
+      "<project>/vendor/ultralytics (used by default)",
+      "<project>/../ultralytics-main (author's sibling checkout, development only)"
+    ]
+  },
+  "target_stack": {
+    "os": "Ubuntu 22.04, Linux x86_64",
+    "gpu": "RTX 4090 24GB (not rented yet; nothing was measured on it)",
+    "python": "3.12",
+    "torch": "2.5.1 (CUDA 12.4 wheel)",
+    "torchvision": "0.20.1",
+    "natten": "0.17.4+torch250cu124 (cp312 manylinux x86_64 wheel)",
+    "timm": "0.6.13 minimal-fix candidate (or the modern interface already adapted here)",
+    "large_kernel_conv": "use_gemm=False -> real nn.Conv2d, no iGEMM extension build",
+    "mmcv_mmdet": "not required by this isolated implementation"
+  },
+  "wheel_evidence": [
+    {
+      "package": "torch 2.5.1 / torchvision 0.20.1 (cu124)",
+      "source": "https://pytorch.org/get-started/previous-versions/",
+      "claim": "a cu124 install combination exists for 2.5.1 + 0.20.1",
+      "verified_how": "official install matrix (documented); not downloaded here"
+    },
+    {
+      "package": "NATTEN 0.17.4",
+      "source": "https://github.com/SHI-Labs/NATTEN/releases/tag/v0.17.4",
+      "claim": "the torch250cu124 build targets Torch 2.5.X, not only 2.5.0",
+      "verified_how": "release notes"
+    },
+    {
+      "package": "natten-0.17.4+torch250cu124-cp312-cp312-linux_x86_64.whl",
+      "source": "https://whl.natten.org/old/",
+      "claim": "the exact CPython 3.12 / Linux x86_64 wheel is published",
+      "verified_how": "wheel index listing; the ~475 MB file was NOT downloaded"
+    },
+    {
+      "package": "NATTEN 0.17.4 API",
+      "source": "https://github.com/SHI-Labs/NATTEN/blob/v0.17.4/src/natten/functional.py",
+      "claim": "na2d_av is still exported in 0.17.4",
+      "verified_how": "tagged source file"
+    },
+    {
+      "package": "timm py3.11+ dataclass issue",
+      "source": "https://github.com/huggingface/pytorch-image-models/issues/1723",
+      "claim": "0.6.12 breaks on Python 3.11+; 0.6.13 carries the fix",
+      "verified_how": "issue + v0.6.13 source",
+      "caveat": "0.6.13 is a *candidate*, not a target-GPU verification result"
+    }
+  ],
+  "not_installed_here": {
+    "natten": "the native CUDA kernel is unavailable locally; CUDA 'auto' would select it, CPU 'auto' selects the differentiable PyTorch reference",
+    "mmcv/mmengine/mmdet": "deliberately not installed; the COCO bridge reuses only the parsing"
+  },
+  "losses": {
+    "yolo11": "ultralytics.utils.loss.v8DetectionLoss (native)",
+    "yolo26": "ultralytics.utils.loss.E2ELoss (native; O2M topk10 / O2O topk7+topk2=1, schedule, L1)",
+    "not_used": [
+      "E2EDetectLoss (older API)",
+      "any hand-written loss/assigner"
+    ]
+  },
+  "metrics": {
+    "primary": "pinned native DetectionValidator + DetMetrics",
+    "keys": [
+      "metrics/precision(B)",
+      "metrics/recall(B)",
+      "metrics/mAP50(B)",
+      "metrics/mAP50-95(B)"
+    ],
+    "conf_default": 0.001,
+    "save_json_default": false,
+    "cocoeval_role": "not used as the primary metric"
+  },
+  "protocol": {
+    "imgsz": 640,
+    "resize": "equal ratio + letterbox, padding value 114",
+    "rect": false,
+    "multi_scale": false,
+    "scale_fill": false,
+    "auto": false,
+    "scaleup": false,
+    "normalisation": "float/255 once in the loader, ImageNet mean/std once inside the stem",
+    "p3_p4_p5_at_640": [
+      [
+        80,
+        80
+      ],
+      [
+        40,
+        40
+      ],
+      [
+        20,
+        20
+      ]
+    ],
+    "anchors": 8400
+  },
+  "resume": {
+    "supported": true,
+    "scope": "only checkpoints written by this project (format overlock-yolo-state-v1)",
+    "stock_ultralytics_checkpoint": "explicitly rejected with an explanatory error",
+    "restores": [
+      "model tensors",
+      "optimizer state",
+      "epoch",
+      "criterion.updates and branch weights"
+    ]
+  }
+}

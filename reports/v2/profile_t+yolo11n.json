@@ -1,0 +1,515 @@
+{
+  "combination": "t+yolo11n",
+  "backbone_variant": "t",
+  "yolo_family": "yolo11",
+  "yolo_scale": "n",
+  "nc": 6,
+  "structure": {
+    "deploy": false,
+    "fused": false,
+    "attention_backend_requested": "auto",
+    "backbone_feature_info": [
+      [
+        4,
+        64
+      ],
+      [
+        8,
+        128
+      ],
+      [
+        16,
+        384
+      ],
+      [
+        32,
+        640
+      ]
+    ],
+    "backbone_p3p4p5": [
+      128,
+      384,
+      640
+    ],
+    "adapter_map": [
+      {
+        "level": "P3",
+        "stride": 8,
+        "backbone_channels": 128,
+        "adapter_channels": 128
+      },
+      {
+        "level": "P4",
+        "stride": 16,
+        "backbone_channels": 384,
+        "adapter_channels": 128
+      },
+      {
+        "level": "P5",
+        "stride": 32,
+        "backbone_channels": 640,
+        "adapter_channels": 256
+      }
+    ],
+    "head": {
+      "class": "Detect",
+      "nc": 6,
+      "reg_max": 16,
+      "stride": [
+        8.0,
+        16.0,
+        32.0
+      ],
+      "has_one2one": false,
+      "end2end": false
+    },
+    "criterion": "v8DetectionLoss"
+  },
+  "parameters": {
+    "buckets": {
+      "backbone_overlock": {
+        "unique_tensors": 1761,
+        "numel": 33127096,
+        "trainable_numel": 33127096,
+        "buffers_numel": 158917
+      },
+      "adapters": {
+        "unique_tensors": 9,
+        "numel": 230400,
+        "trainable_numel": 230400,
+        "buffers_numel": 1027
+      },
+      "neck_head_native": {
+        "unique_tensors": 136,
+        "numel": 1225538,
+        "trainable_numel": 1225522,
+        "buffers_numel": 7049
+      }
+    },
+    "aliases": [],
+    "total": {
+      "unique_parameters": 1906,
+      "unique_numel": 34583034,
+      "named_parameters": 1906,
+      "trainable_numel": 34583018,
+      "frozen_numel": 16,
+      "buffers_numel": 166999,
+      "buckets_sum_numel": 34583034,
+      "duplicate_registration": [],
+      "buckets_cover_all_parameters": true
+    }
+  },
+  "build_seconds": 0.546,
+  "input_invariance": {
+    "numel_by_imgsz": {
+      "224": 34583034,
+      "640": 34583034
+    },
+    "invariant": true,
+    "note": "the parameter count is a structure property; the input area changes MACs, not parameters"
+  },
+  "cost_basis": {
+    "batch": 1,
+    "eval_mode": true,
+    "dtype": "float32",
+    "macs_definition": "1 MAC = 1 multiply-accumulate (GFLOPs uses 1 MAC = 2 FLOPs)",
+    "excludes": [
+      "resize/letterbox",
+      "image decode",
+      "NMS",
+      "post-processing",
+      "loss"
+    ]
+  },
+  "partial_macs": {
+    "available": true,
+    "partial_macs": 49842812928,
+    "partial_gflops_1mac2flops": 99.685625856,
+    "macs_definition": "1 MAC = 1 multiply-accumulate; the GFLOPs column uses 1 MAC = 2 FLOPs",
+    "imgsz": 640,
+    "batch": 1,
+    "dtype": "torch.float32",
+    "device": "cpu",
+    "profiler": "thop 0.1.1",
+    "supported_ops": [
+      "nn.Conv2d",
+      "nn.Linear",
+      "nn.BatchNorm2d",
+      "native Attention/AAttn (custom_ops)"
+    ],
+    "unsupported_ops_excluded": [
+      "natten na2d_av (custom op)",
+      "einops.einsum dynamic-kernel weight generation",
+      "torch.matmul/softmax inside DynamicConvBlock",
+      "F.interpolate / adaptive_avg_pool2d",
+      "GRN (norm/mean reductions)",
+      "LayerScale (groupwise F.conv2d)",
+      "DFL softmax projection"
+    ],
+    "completeness": "partial_macs -- conv/linear/batchnorm only; NOT the full detector cost",
+    "seconds": 4.33
+  },
+  "na2d_av_macs": {
+    "calls": 28,
+    "macs": 491929600,
+    "per_call": [
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          5
+        ],
+        "macs": 5120000
+      },
+      {
+        "shape": [
+          1,
+          8,
+          40,
+          40,
+          16,
+          13
+        ],
+        "macs": 34611200
+      },
+      {
+        "shape": [
+          1,
+          16,
+          20,
+          20,
+          16,
+          5
+        ],
+        "macs": 2560000
+      },
+      {
+        "shape": [
+          1,
+          16,
+          20,
+          20,
+          16,
+          7
+        ],
+        "macs": 5017600
+      },
+      {
+        "shape": [
+          1,
+          16,
+          20,
+          20,
+          16,
+          5
+        ],
+        "macs": 2560000
+      },
+      {
+        "shape": [
+          1,
+          16,
+          20,
+          20,
+          16,
+          7
+        ],
+        "macs": 5017600
+      }
+    ],
+    "definition": "sum over calls of B*heads*H*W*D*K*K multiply-accumulates",
+    "imgsz": 640,
+    "batch": 1
+  },
+  "partial_plus_na2d_macs": 50334742528,
+  "partial_plus_na2d_gflops_1mac2flops": 100.669485056,
+  "completeness": "partial: conv/linear/batchnorm (THOP) + analytically counted na2d_av MACs. einsum dynamic-kernel generation, softmax and interpolations remain uncounted.",
+  "complete_flops": {
+    "available": false,
+    "reason": "no complete FLOPs profiler covers the custom operators"
+  },
+  "profiler_versions": {
+    "thop": "0.1.1",
+    "torch": "2.11.0",
+    "custom_ops": "analytic na2d_av MACs (B*heads*H*W*D*K*K per call), measured on real shapes"
+  },
+  "structure_state": {
+    "deploy": false,
+    "fused": false,
+    "attention_backend": {
+      "requested": [
+        "auto"
+      ],
+      "resolved_by_device": {
+        "cpu:None": {
+          "requested": "auto",
+          "resolved": "torch_reference",
+          "reason": "auto: NATTEN not importable (ModuleNotFoundError: No module named 'natten'); using the differentiable PyTorch reference",
+          "device": "cpu",
+          "cuda_available": false,
+          "natten_importable": false,
+          "natten_import_error": "ModuleNotFoundError: No module named 'natten'"
+        }
+      },
+      "any_native": false,
+      "any_reference": true,
+      "resolutions": {
+        "cpu": {
+          "requested": "auto",
+          "resolved": "torch_reference",
+          "reason": "auto: NATTEN not importable (ModuleNotFoundError: No module named 'natten'); using the differentiable PyTorch reference",
+          "device": "cpu",
+          "cuda_available": false,
+          "natten_importable": false,
+          "natten_import_error": "ModuleNotFoundError: No module named 'natten'"
+        }
+      },
+      "row_chunk": 0
+    }
+  }
+}

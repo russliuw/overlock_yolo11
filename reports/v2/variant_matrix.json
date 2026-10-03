@@ -1,0 +1,502 @@
+{
+  "backbone_measured_numel": {
+    "xt": 15657380,
+    "t": 33127096,
+    "s": 56446524,
+    "b": 96091496
+  },
+  "tail_measured_numel": {
+    "yolo11n": 1225538,
+    "yolo11s": 3988130,
+    "yolo11m": 9705442,
+    "yolo11l": 12481506,
+    "yolo11x": 28033378,
+    "yolo26n": 1140668,
+    "yolo26s": 4510524,
+    "yolo26m": 11429948,
+    "yolo26l": 13351996,
+    "yolo26x": 29975100
+  },
+  "adapter_formula": "sum_i(c_in_i*c_out_i + 2*c_out_i) over the three 1x1 Conv-BN-SiLU adapters (nn.Conv2d(bias=False) + BatchNorm2d)",
+  "cells": [
+    {
+      "combination": "xt+yolo11n",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "backbone_numel": 15657380,
+      "adapter_numel": 166400,
+      "tail_numel": 1225538,
+      "total_numel": 17049318,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo11s",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "backbone_numel": 15657380,
+      "adapter_numel": 332800,
+      "tail_numel": 3988130,
+      "total_numel": 19978310,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo11m",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "backbone_numel": 15657380,
+      "adapter_numel": 449536,
+      "tail_numel": 9705442,
+      "total_numel": 25812358,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo11l",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "backbone_numel": 15657380,
+      "adapter_numel": 449536,
+      "tail_numel": 12481506,
+      "total_numel": 28588422,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo11x",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "backbone_numel": 15657380,
+      "adapter_numel": 674304,
+      "tail_numel": 28033378,
+      "total_numel": 44365062,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo26n",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "backbone_numel": 15657380,
+      "adapter_numel": 166400,
+      "tail_numel": 1140668,
+      "total_numel": 16964448,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo26s",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "backbone_numel": 15657380,
+      "adapter_numel": 332800,
+      "tail_numel": 4510524,
+      "total_numel": 20500704,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo26m",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "backbone_numel": 15657380,
+      "adapter_numel": 449536,
+      "tail_numel": 11429948,
+      "total_numel": 27536864,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo26l",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "backbone_numel": 15657380,
+      "adapter_numel": 449536,
+      "tail_numel": 13351996,
+      "total_numel": 29458912,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "xt+yolo26x",
+      "backbone_variant": "xt",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "backbone_numel": 15657380,
+      "adapter_numel": 674304,
+      "tail_numel": 29975100,
+      "total_numel": 46306784,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo11n",
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "backbone_numel": 33127096,
+      "adapter_numel": 230400,
+      "tail_numel": 1225538,
+      "total_numel": 34583034,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo11s",
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "backbone_numel": 33127096,
+      "adapter_numel": 460800,
+      "tail_numel": 3988130,
+      "total_numel": 37576026,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo11m",
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "backbone_numel": 33127096,
+      "adapter_numel": 592896,
+      "tail_numel": 9705442,
+      "total_numel": 43425434,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo11l",
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "backbone_numel": 33127096,
+      "adapter_numel": 592896,
+      "tail_numel": 12481506,
+      "total_numel": 46201498,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo11x",
+      "backbone_variant": "t",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "backbone_numel": 33127096,
+      "adapter_numel": 889344,
+      "tail_numel": 28033378,
+      "total_numel": 62049818,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo26n",
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "backbone_numel": 33127096,
+      "adapter_numel": 230400,
+      "tail_numel": 1140668,
+      "total_numel": 34498164,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo26s",
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "backbone_numel": 33127096,
+      "adapter_numel": 460800,
+      "tail_numel": 4510524,
+      "total_numel": 38098420,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo26m",
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "backbone_numel": 33127096,
+      "adapter_numel": 592896,
+      "tail_numel": 11429948,
+      "total_numel": 45149940,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo26l",
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "backbone_numel": 33127096,
+      "adapter_numel": 592896,
+      "tail_numel": 13351996,
+      "total_numel": 47071988,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "t+yolo26x",
+      "backbone_variant": "t",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "backbone_numel": 33127096,
+      "adapter_numel": 889344,
+      "tail_numel": 29975100,
+      "total_numel": 63991540,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo11n",
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "backbone_numel": 56446524,
+      "adapter_numel": 238592,
+      "tail_numel": 1225538,
+      "total_numel": 57910654,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo11s",
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "backbone_numel": 56446524,
+      "adapter_numel": 477184,
+      "tail_numel": 3988130,
+      "total_numel": 60911838,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo11m",
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "backbone_numel": 56446524,
+      "adapter_numel": 625664,
+      "tail_numel": 9705442,
+      "total_numel": 66777630,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo11l",
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "backbone_numel": 56446524,
+      "adapter_numel": 625664,
+      "tail_numel": 12481506,
+      "total_numel": 69553694,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo11x",
+      "backbone_variant": "s",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "backbone_numel": 56446524,
+      "adapter_numel": 938496,
+      "tail_numel": 28033378,
+      "total_numel": 85418398,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo26n",
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "backbone_numel": 56446524,
+      "adapter_numel": 238592,
+      "tail_numel": 1140668,
+      "total_numel": 57825784,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo26s",
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "backbone_numel": 56446524,
+      "adapter_numel": 477184,
+      "tail_numel": 4510524,
+      "total_numel": 61434232,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo26m",
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "backbone_numel": 56446524,
+      "adapter_numel": 625664,
+      "tail_numel": 11429948,
+      "total_numel": 68502136,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo26l",
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "backbone_numel": 56446524,
+      "adapter_numel": 625664,
+      "tail_numel": 13351996,
+      "total_numel": 70424184,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "s+yolo26x",
+      "backbone_variant": "s",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "backbone_numel": 56446524,
+      "adapter_numel": 938496,
+      "tail_numel": 29975100,
+      "total_numel": 87360120,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo11n",
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "n",
+      "backbone_numel": 96091496,
+      "adapter_numel": 273408,
+      "tail_numel": 1225538,
+      "total_numel": 97590442,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo11s",
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "s",
+      "backbone_numel": 96091496,
+      "adapter_numel": 546816,
+      "tail_numel": 3988130,
+      "total_numel": 100626442,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo11m",
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "m",
+      "backbone_numel": 96091496,
+      "adapter_numel": 723968,
+      "tail_numel": 9705442,
+      "total_numel": 106520906,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo11l",
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "l",
+      "backbone_numel": 96091496,
+      "adapter_numel": 723968,
+      "tail_numel": 12481506,
+      "total_numel": 109296970,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo11x",
+      "backbone_variant": "b",
+      "yolo_family": "yolo11",
+      "yolo_scale": "x",
+      "backbone_numel": 96091496,
+      "adapter_numel": 1085952,
+      "tail_numel": 28033378,
+      "total_numel": 125210826,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo26n",
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "n",
+      "backbone_numel": 96091496,
+      "adapter_numel": 273408,
+      "tail_numel": 1140668,
+      "total_numel": 97505572,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo26s",
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "s",
+      "backbone_numel": 96091496,
+      "adapter_numel": 546816,
+      "tail_numel": 4510524,
+      "total_numel": 101148836,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo26m",
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "m",
+      "backbone_numel": 96091496,
+      "adapter_numel": 723968,
+      "tail_numel": 11429948,
+      "total_numel": 108245412,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo26l",
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "l",
+      "backbone_numel": 96091496,
+      "adapter_numel": 723968,
+      "tail_numel": 13351996,
+      "total_numel": 110167460,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    },
+    {
+      "combination": "b+yolo26x",
+      "backbone_variant": "b",
+      "yolo_family": "yolo26",
+      "yolo_scale": "x",
+      "backbone_numel": 96091496,
+      "adapter_numel": 1085952,
+      "tail_numel": 29975100,
+      "total_numel": 127152548,
+      "source": "derived from independently measured backbone + adapter formula + tail"
+    }
+  ],
+  "n_cells": 40,
+  "assembled_cross_checks": [
+    {
+      "combination": "t+yolo11s",
+      "matrix_total": 37576026,
+      "assembled_total": 37576026,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "combination": "t+yolo11n",
+      "matrix_total": 34583034,
+      "assembled_total": 34583034,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "combination": "b+yolo11s",
+      "matrix_total": 100626442,
+      "assembled_total": 100626442,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "combination": "t+yolo26n",
+      "matrix_total": 34498164,
+      "assembled_total": 34498164,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "combination": "t+yolo26s",
+      "matrix_total": 38098420,
+      "assembled_total": 38098420,
+      "match": true,
+      "delta": 0
+    }
+  ],
+  "all_cross_checks_match": true
+}

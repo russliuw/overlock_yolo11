@@ -1,0 +1,299 @@
+{
+  "checkpoint": {
+    "path": "/Users/lw/Documents/CNN-Mamba/OverLoCK-main/checkpoints/overlock_b_in1k_224.pth",
+    "size_bytes": 395257645,
+    "sha256": "558b8b79c205c10f13e42d0ee22a8309e248fd6ab76a7ef40b4e0141c71481e8",
+    "load_call": "torch.load(path, map_location='cpu', weights_only=True)",
+    "weights_only": true,
+    "status": "ok",
+    "top_level_type": "OrderedDict"
+  },
+  "container": {
+    "container_choice": "<top-level state_dict>",
+    "container_candidates": [
+      {
+        "key": "<top-level>",
+        "kind": "flat_tensor_state_dict",
+        "n_tensors": 4793
+      }
+    ],
+    "prefix_transforms": [],
+    "top_level_keys": null
+  },
+  "prefix_transforms": [],
+  "n_checkpoint_tensors": 4793,
+  "n_target_tensors": 4792,
+  "allow_missing_keys": [],
+  "allow_missing_prefixes": [
+    "extra_norm.",
+    "h_proj."
+  ],
+  "ignore_prefixes": [
+    "head.",
+    "aux_head."
+  ],
+  "checkpoint_module_breakdown": {
+    "sub_blocks3": 2416,
+    "blocks3": 650,
+    "blocks1": 504,
+    "blocks2": 504,
+    "sub_blocks4": 436,
+    "blocks4": 212,
+    "patch_embed1": 24,
+    "patch_embedx": 12,
+    "head": 8,
+    "aux_head": 7,
+    "patch_embed2": 6,
+    "patch_embed3": 6,
+    "patch_embed4": 6,
+    "high_level_proj": 2
+  },
+  "matched": {
+    "count": 4778,
+    "numel": 96052305
+  },
+  "ignored_classification_only": {
+    "count": 15,
+    "numel": 2345682,
+    "keys": [
+      "aux_head.0.bias",
+      "aux_head.0.num_batches_tracked",
+      "aux_head.0.running_mean",
+      "aux_head.0.running_var",
+      "aux_head.0.weight",
+      "aux_head.2.bias",
+      "aux_head.2.weight",
+      "head.0.weight",
+      "head.1.bias",
+      "head.1.num_batches_tracked",
+      "head.1.running_mean",
+      "head.1.running_var",
+      "head.1.weight",
+      "head.4.bias",
+      "head.4.weight"
+    ]
+  },
+  "unexpected": {
+    "count": 0,
+    "keys": []
+  },
+  "shape_mismatch": {},
+  "missing_allowed": {
+    "count": 14,
+    "numel": 421008,
+    "keys": [
+      "extra_norm.0.bias",
+      "extra_norm.0.weight",
+      "extra_norm.1.bias",
+      "extra_norm.1.weight",
+      "extra_norm.2.bias",
+      "extra_norm.2.weight",
+      "extra_norm.3.bias",
+      "extra_norm.3.weight",
+      "extra_norm.4.bias",
+      "extra_norm.4.weight",
+      "h_proj.0.bias",
+      "h_proj.0.weight",
+      "h_proj.1.bias",
+      "h_proj.1.weight"
+    ]
+  },
+  "missing_disallowed": {
+    "count": 0,
+    "numel": 0,
+    "keys": []
+  },
+  "coverage_by_module": {
+    "blocks1": {
+      "target_numel": 794432,
+      "matched_numel": 794432,
+      "missing_numel": 0,
+      "target_tensors": 504,
+      "matched_tensors": 504,
+      "numel_coverage": 1.0
+    },
+    "blocks2": {
+      "target_numel": 2295264,
+      "matched_numel": 2295264,
+      "missing_numel": 0,
+      "target_tensors": 504,
+      "matched_tensors": 504,
+      "numel_coverage": 1.0
+    },
+    "blocks3": {
+      "target_numel": 13774640,
+      "matched_numel": 13774640,
+      "missing_numel": 0,
+      "target_tensors": 650,
+      "matched_tensors": 650,
+      "numel_coverage": 1.0
+    },
+    "blocks4": {
+      "target_numel": 11393592,
+      "matched_numel": 11393592,
+      "missing_numel": 0,
+      "target_tensors": 212,
+      "matched_tensors": 212,
+      "numel_coverage": 1.0
+    },
+    "sub_blocks3": {
+      "target_numel": 45092424,
+      "matched_numel": 45092424,
+      "missing_numel": 0,
+      "target_tensors": 2416,
+      "matched_tensors": 2416,
+      "numel_coverage": 1.0
+    },
+    "sub_blocks4": {
+      "target_numel": 17672560,
+      "matched_numel": 17672560,
+      "missing_numel": 0,
+      "target_tensors": 436,
+      "matched_tensors": 436,
+      "numel_coverage": 1.0
+    },
+    "extra_norm": {
+      "target_numel": 4128,
+      "matched_numel": 0,
+      "missing_numel": 4128,
+      "target_tensors": 10,
+      "matched_tensors": 0,
+      "numel_coverage": 0.0
+    },
+    "other": {
+      "target_numel": 5446273,
+      "matched_numel": 5029393,
+      "missing_numel": 416880,
+      "target_tensors": 60,
+      "matched_tensors": 56,
+      "numel_coverage": 0.923456
+    }
+  },
+  "coverage_by_module_excluding_allowed_missing": {
+    "blocks1": 1.0,
+    "blocks2": 1.0,
+    "blocks3": 1.0,
+    "blocks4": 1.0,
+    "sub_blocks3": 1.0,
+    "sub_blocks4": 1.0,
+    "extra_norm": null,
+    "other": 1.0
+  },
+  "totals": {
+    "target_tensors": 4792,
+    "target_numel": 96473313,
+    "matched_tensors": 4778,
+    "matched_numel": 96052305,
+    "numel_coverage": 0.995636,
+    "trainable_tensors": 3085,
+    "trainable_numel": 96091496,
+    "trainable_missing_tensors": 14,
+    "trainable_missing_numel": 421008,
+    "trainable_missing_disallowed_tensors": 0,
+    "trainable_missing_disallowed_numel": 0
+  },
+  "status": "ok",
+  "load_state_dict_call": "model.load_state_dict(matched_subset, strict=False) (subset already audited)",
+  "variant": "b",
+  "representative_param_check": {
+    "patch_embed1.0.weight": {
+      "status": "equal",
+      "shape": [
+        40,
+        3,
+        3,
+        3
+      ],
+      "numel": 1080,
+      "checkpoint_absmax": 0.4277290403842926
+    },
+    "blocks3.0.dwconv.weight": {
+      "status": "equal",
+      "shape": [
+        384,
+        1,
+        3,
+        3
+      ],
+      "numel": 3456,
+      "checkpoint_absmax": 1.1181379556655884
+    },
+    "blocks3.0.proj.1.lk_origin.weight": {
+      "status": "equal",
+      "shape": [
+        384,
+        1,
+        13,
+        13
+      ],
+      "numel": 64896,
+      "checkpoint_absmax": 0.6308665871620178
+    },
+    "blocks4.3.proj.1.dil_conv_k3_3.weight": {
+      "status": "equal",
+      "shape": [
+        576,
+        1,
+        3,
+        3
+      ],
+      "numel": 5184,
+      "checkpoint_absmax": 0.766376793384552
+    },
+    "sub_blocks3.0.weight_proj.weight": {
+      "status": "equal",
+      "shape": [
+        194,
+        49,
+        1,
+        1
+      ],
+      "numel": 9506,
+      "checkpoint_absmax": 0.4624689817428589
+    },
+    "sub_blocks3.0.rpb1": {
+      "status": "equal",
+      "shape": [
+        12,
+        9,
+        9
+      ],
+      "numel": 972,
+      "checkpoint_absmax": 0.3852381706237793
+    },
+    "sub_blocks4.3.proj.2.weight": {
+      "status": "absent_in_checkpoint"
+    },
+    "patch_embedx.h_proj.0.weight": {
+      "status": "equal",
+      "shape": [
+        144,
+        144,
+        3,
+        3
+      ],
+      "numel": 186624,
+      "checkpoint_absmax": 0.9640308022499084
+    },
+    "h_proj.0.weight": {
+      "status": "absent_in_checkpoint"
+    },
+    "high_level_proj.weight": {
+      "status": "equal",
+      "shape": [
+        144,
+        576,
+        1,
+        1
+      ],
+      "numel": 82944,
+      "checkpoint_absmax": 2.2835447788238525
+    },
+    "extra_norm.4.weight": {
+      "status": "absent_in_checkpoint"
+    },
+    "_all_equal": false,
+    "_n_checked": 11
+  },
+  "cross_variant_load_rejected": "CheckpointError: checkpoint audit failed: 2365 shape mismatches (strict_shapes=True); 2056 non-whitelisted target keys missing, e.g. ['blocks1.4.dwconv.bias', 'blocks1.4.dwconv.weight', 'blocks1.4.proj.0.bias', 'blocks1.4.proj.0.weight',"
+}

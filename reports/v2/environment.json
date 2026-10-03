@@ -1,0 +1,56 @@
+{
+  "generated_by": "scripts/report_environment.py",
+  "role": "LOCAL verification environment -- not the target server",
+  "python": "3.10.20 (main, Mar 11 2026, 17:43:48) [Clang 20.1.8 ]",
+  "python_executable": "/opt/miniconda3/envs/3dete/bin/python",
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "cwd": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11",
+  "project_root": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11",
+  "torch": "2.11.0",
+  "torch_cuda_build": null,
+  "cuda_available": false,
+  "torchvision": "0.26.0",
+  "numpy": "2.2.6",
+  "yaml": "6.0.3",
+  "torch_threads": 2,
+  "device_used_for_all_local_checks": "cpu",
+  "dtype_used_for_all_local_checks": "float32",
+  "amp": false,
+  "workers": 0,
+  "target_server_stack": {
+    "os": "Ubuntu 22.04, Linux x86_64",
+    "gpu": "RTX 4090 24GB (not rented yet; nothing was measured on it)",
+    "python": "3.12",
+    "torch": "2.5.1 (CUDA 12.4 wheel)",
+    "torchvision": "0.20.1",
+    "natten": "0.17.4+torch250cu124 (cp312 manylinux x86_64 wheel)",
+    "timm": "0.6.13 minimal-fix candidate (or the modern interface already adapted here)",
+    "large_kernel_conv": "use_gemm=False -> real nn.Conv2d, no iGEMM extension build",
+    "mmcv_mmdet": "not required by this isolated implementation"
+  },
+  "differences_from_target": [
+    "Python 3.10 here vs 3.12 on the server",
+    "torch 2.11 (CPU-only build) here vs 2.5.1+cu124 on the server",
+    "no CUDA device locally",
+    "NATTEN is not installed locally, so every local attention call used the bundled differentiable PyTorch reference (reported per model as torch_reference)"
+  ],
+  "not_verified": [
+    "target GPU availability, memory and latency",
+    "NATTEN native kernel numerics/latency",
+    "AMP",
+    "training convergence and any AP number",
+    "DDP / multi-GPU"
+  ],
+  "packages": {
+    "torch": "2.11.0",
+    "torchvision": "0.26.0",
+    "numpy": "2.2.6",
+    "PyYAML": "6.0.3",
+    "einops": "0.8.2",
+    "timm": "1.0.27",
+    "thop": "0.1.1-2209072238",
+    "Pillow": "12.2.0",
+    "scipy": "1.15.3"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "python": "3.10.20 (main, Mar 11 2026, 17:43:48) [Clang 20.1.8 ]",
+  "python_executable": "/opt/miniconda3/envs/3dete/bin/python",
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "torch_num_threads": 2,
+  "torch_cuda_available": false,
+  "device_used": "cpu",
+  "dtype": "float32",
+  "amp": false,
+  "workers": 0,
+  "cwd": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11",
+  "yolo_config_dir": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/cache/ultralytics",
+  "modules": {
+    "torch": {
+      "importable": true,
+      "version": "2.11.0",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/torch/__init__.py",
+      "error": null
+    },
+    "torchvision": {
+      "importable": true,
+      "version": "0.26.0",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/torchvision/__init__.py",
+      "error": null
+    },
+    "timm": {
+      "importable": true,
+      "version": "1.0.27",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/timm/__init__.py",
+      "error": null
+    },
+    "einops": {
+      "importable": true,
+      "version": "0.8.2",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/einops/__init__.py",
+      "error": null
+    },
+    "numpy": {
+      "importable": true,
+      "version": "2.2.6",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/numpy/__init__.py",
+      "error": null
+    },
+    "PIL": {
+      "importable": true,
+      "version": "12.2.0",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/PIL/__init__.py",
+      "error": null
+    },
+    "yaml": {
+      "importable": true,
+      "version": "6.0.3",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/yaml/__init__.py",
+      "error": null
+    },
+    "ultralytics": {
+      "importable": true,
+      "version": "8.0.196",
+      "path": "/opt/miniconda3/envs/3dete/lib/python3.10/site-packages/ultralytics/__init__.py",
+      "error": null
+    },
+    "natten": {
+      "importable": false,
+      "version": null,
+      "path": null,
+      "error": "ModuleNotFoundError: No module named 'natten'"
+    },
+    "mmcv": {
+      "importable": false,
+      "version": null,
+      "path": null,
+      "error": "ModuleNotFoundError: No module named 'mmcv'"
+    },
+    "mmengine": {
+      "importable": false,
+      "version": null,
+      "path": null,
+      "error": "ModuleNotFoundError: No module named 'mmengine'"
+    },
+    "mmdet": {
+      "importable": false,
+      "version": null,
+      "path": null,
+      "error": "ModuleNotFoundError: No module named 'mmdet'"
+    }
+  }
+}

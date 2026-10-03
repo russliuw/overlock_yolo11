@@ -1,0 +1,225 @@
+{
+  "out_dir": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke",
+  "source": {
+    "yaml": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/soda10m.yaml",
+    "root": "/Users/lw/Documents/CNN-Mamba/data/SODA10M",
+    "splits": {
+      "train": {
+        "images_dir": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/train",
+        "annotations": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/annotations/instance_train.json"
+      },
+      "val": {
+        "images_dir": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/val",
+        "annotations": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/annotations/instance_val.json"
+      }
+    }
+  },
+  "nc": 6,
+  "names": {
+    "0": "Pedestrian",
+    "1": "Cyclist",
+    "2": "Car",
+    "3": "Truck",
+    "4": "Tram",
+    "5": "Tricycle"
+  },
+  "category_id_map": {
+    "1": 0,
+    "2": 1,
+    "3": 2,
+    "4": 3,
+    "5": 4,
+    "6": 5
+  },
+  "limit_per_split": 2,
+  "image_access": "per-file-symlink (images/<split> is a real directory)",
+  "splits": {
+    "train": {
+      "annotations_file": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/annotations/instance_train.json",
+      "images_dir": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/train",
+      "image_access": "per-file-symlink",
+      "images_dir_is_symlink": false,
+      "labels_dir_is_symlink": false,
+      "n_images": 2,
+      "n_visible_images": 2,
+      "n_label_files": 2,
+      "image_id_min": 1,
+      "image_id_max": 2,
+      "selected_image_ids": [
+        1,
+        2
+      ],
+      "labels_dir": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke/labels/train",
+      "validation": {
+        "images": 5000,
+        "annotations": 41110,
+        "categories": {
+          "1": "Pedestrian",
+          "2": "Cyclist",
+          "3": "Car",
+          "4": "Truck",
+          "5": "Tram",
+          "6": "Tricycle"
+        },
+        "category_id_map": {
+          "1": 0,
+          "2": 1,
+          "3": 2,
+          "4": 3,
+          "5": 4,
+          "6": 5
+        },
+        "per_class": {
+          "Car": 23456,
+          "Cyclist": 6548,
+          "Truck": 4297,
+          "Tram": 1681,
+          "Pedestrian": 4901,
+          "Tricycle": 227
+        },
+        "flag_counts": {
+          "annotations": 41110,
+          "negative_xy": 261
+        },
+        "crowd_or_ignore_present": false,
+        "duplicate_ids": [],
+        "missing_files": [],
+        "path_escapes": []
+      },
+      "stats": {
+        "images_linked": 2,
+        "size_checks": 2,
+        "annotations_seen": 37,
+        "boxes_written": 37
+      },
+      "per_class_written": {
+        "Truck": 4,
+        "Car": 19,
+        "Tram": 2,
+        "Cyclist": 12
+      },
+      "size_mismatches": [],
+      "first_samples": [
+        {
+          "image_id": 1,
+          "file_name": "HT_TRAIN_000001_SH_000.jpg",
+          "size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "image_id": 2,
+          "file_name": "HT_TRAIN_000002_SH_000.jpg",
+          "size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    "val": {
+      "annotations_file": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/annotations/instance_val.json",
+      "images_dir": "/Users/lw/Documents/CNN-Mamba/data/SODA10M/val",
+      "image_access": "per-file-symlink",
+      "images_dir_is_symlink": false,
+      "labels_dir_is_symlink": false,
+      "n_images": 2,
+      "n_visible_images": 2,
+      "n_label_files": 2,
+      "image_id_min": 1,
+      "image_id_max": 2,
+      "selected_image_ids": [
+        1,
+        2
+      ],
+      "labels_dir": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke/labels/val",
+      "validation": {
+        "images": 5000,
+        "annotations": 37129,
+        "categories": {
+          "1": "Pedestrian",
+          "2": "Cyclist",
+          "3": "Car",
+          "4": "Truck",
+          "5": "Tram",
+          "6": "Tricycle"
+        },
+        "category_id_map": {
+          "1": 0,
+          "2": 1,
+          "3": 2,
+          "4": 3,
+          "5": 4,
+          "6": 5
+        },
+        "per_class": {
+          "Cyclist": 2624,
+          "Pedestrian": 2837,
+          "Car": 20648,
+          "Truck": 9532,
+          "Tram": 1391,
+          "Tricycle": 97
+        },
+        "flag_counts": {
+          "annotations": 37129,
+          "negative_xy": 281
+        },
+        "crowd_or_ignore_present": false,
+        "duplicate_ids": [],
+        "missing_files": [],
+        "path_escapes": []
+      },
+      "stats": {
+        "images_linked": 2,
+        "size_checks": 2,
+        "annotations_seen": 29,
+        "boxes_written": 29
+      },
+      "per_class_written": {
+        "Cyclist": 9,
+        "Pedestrian": 6,
+        "Car": 11,
+        "Truck": 2,
+        "Tram": 1
+      },
+      "size_mismatches": [],
+      "first_samples": [
+        {
+          "image_id": 1,
+          "file_name": "HT_VAL_000001_SH_001.jpg",
+          "size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "image_id": 2,
+          "file_name": "HT_VAL_000002_SZ_010.jpg",
+          "size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    }
+  },
+  "image_id_map_path": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke/image_id_map.json",
+  "data_yaml": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke/data.yaml",
+  "data_yaml_content": {
+    "path": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke",
+    "train": "images/train",
+    "val": "images/val",
+    "nc": 6,
+    "names": {
+      "0": "Pedestrian",
+      "1": "Cyclist",
+      "2": "Car",
+      "3": "Truck",
+      "4": "Tram",
+      "5": "Tricycle"
+    }
+  },
+  "smoke_marker": "/Users/lw/Documents/CNN-Mamba/overlock_yolo11/data/soda_smoke/overlock_smoke_view.json",
+  "source_cache_files_written": []
+}
